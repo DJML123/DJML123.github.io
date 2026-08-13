@@ -1,0 +1,120 @@
+.maplibregl-ctrl-top-right {
+  top: 200px;
+  right: 16px;
+}
+
+.maplibregl-ctrl-top-right .maplibregl-ctrl-group {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.maplibregl-ctrl-top-right .maplibregl-ctrl-group button + button {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Lifted clear of the bottom navigation bar, which is ~86px tall and owns the
+   bottom edge now - the attribution used to render underneath its labels. */
+.maplibregl-ctrl-bottom-right,
+.maplibregl-ctrl-bottom-left {
+  bottom: 88px;
+}
+
+/* Attribution, restyled as one of the app's own surfaces.
+   MapLibre's default is a white rectangle with square corners and Helvetica -
+   the one piece of chrome on the map that did not look like the rest of the
+   app. Collapsed it is now the same rounded, soft-shadowed pill as the map
+   tools; expanded it keeps that shape and only grows. The collapsed state is
+   set on load in map-view.web.tsx, because MapLibre mounts compact
+   attribution expanded. */
+.maplibregl-ctrl-attrib {
+  font-family: inherit;
+  font-size: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  color: #52525b;
+  padding: 0;
+}
+
+/* Two classes, to outrank MapLibre's own `.maplibregl-ctrl-attrib.maplibregl-compact`
+   rule - a single-class selector loses to it no matter the import order. */
+.maplibregl-ctrl-attrib.maplibregl-compact {
+  border-radius: 999px;
+}
+
+.maplibregl-ctrl-attrib.maplibregl-compact-show {
+  border-radius: 16px;
+  padding: 4px 28px 4px 12px;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: #52525b;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* The ⓘ toggle. MapLibre draws its own glyph as a background image; only the
+   frame around it is ours - matched to the 12px-radius chips elsewhere. */
+.maplibregl-ctrl-attrib-button {
+  border-radius: 999px;
+  opacity: 0.55;
+}
+
+.maplibregl-ctrl-attrib-button:hover {
+  opacity: 0.9;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Keyed on NativeWind's `dark` class on <html>, not `prefers-color-scheme`:
+   the theme here is a setting the user picks in the app, so a light OS with
+   the app in dark mode has to get the dark pill too. */
+:root.dark .maplibregl-ctrl-attrib {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(28, 28, 34, 0.94);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  color: #a1a1aa;
+}
+
+:root.dark .maplibregl-ctrl-attrib a {
+  color: #a1a1aa;
+}
+
+/* MapLibre's ⓘ is a dark SVG baked into a background image, so on a dark
+   pill it is invisible - inverting the glyph is the only way to recolour it. */
+:root.dark .maplibregl-ctrl-attrib-button {
+  filter: invert(1);
+}
+
+:root.dark .maplibregl-ctrl-attrib-button:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* "You are here" dot: blue when GPS-tracked, violet when it only comes from
+   the IP fallback. Styled on the inner element because MapLibre rewrites the
+   marker element's own transform/opacity every frame. */
+.onspot-user-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 3px solid #ffffff;
+  /* Static ring instead of the old radar pulse: a dot that never stops moving
+     reads as "still searching", and the accuracy circle underneath already
+     communicates how sure the fix is. */
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.22),
+    0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.onspot-user-dot--ip {
+  background: #8b5cf6;
+  box-shadow:
+    0 0 0 4px rgba(139, 92, 246, 0.2),
+    0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+
