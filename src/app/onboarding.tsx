@@ -261,6 +261,7 @@ function GenreStep({ selected, onToggle }: { selected: string[]; onToggle: (key:
           <SelectCard
             key={g.key}
             className="w-[47%] grow"
+            layout="tile"
             emoji={g.emoji}
             label={g.label}
             selected={selected.includes(g.key)}
