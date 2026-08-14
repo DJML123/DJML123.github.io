@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AppText as Text, AppTextInput as TextInput } from '@/components/ui/app-text';
-import { ChevronLeft, Lock, Pin, PinOff, Send, Timer } from 'lucide-react-native';
+import { ChevronLeft, Lock, Pin, PinOff, Send, Timer } from '@/components/ui/icons';
 import { useEffect, useState } from 'react';
 import { FlatList, KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet, View } from 'react-native';
 import { avatar } from '@/constants/mock-data';

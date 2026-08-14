@@ -15,7 +15,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import { Platform, useColorScheme } from 'react-native';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
 import { ActivityProvider } from '@/constants/activity-context';
 import { AuthProvider } from '@/constants/auth-context';
 import { CoinsProvider } from '@/constants/coins-context';
@@ -79,7 +78,6 @@ export default function RootLayout() {
               <PrefsProvider>
                 <SavedProvider>
                   <ActivityProvider>
-                    <AnimatedSplashOverlay />
                     <SyncBridge />
                     <Stack screenOptions={{ headerShown: false }} />
                   </ActivityProvider>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Animated, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import type { LucideIcon } from 'lucide-react-native';
+import type { LucideIcon } from '@/components/ui/icons';
 import { AppText as Text } from '@/components/ui/app-text';
 import { usePrefs } from '@/constants/prefs-context';
 import { accentOf } from '@/constants/accent';

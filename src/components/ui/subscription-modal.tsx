@@ -1,4 +1,4 @@
-import { Flame, Gem, Rocket, ShieldOff, Sparkles, type LucideIcon } from 'lucide-react-native';
+import { Flame, Gem, Rocket, ShieldOff, Sparkles, type LucideIcon } from '@/components/ui/icons';
 import { useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { usePrefs } from '@/constants/prefs-context';

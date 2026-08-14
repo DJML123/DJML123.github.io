@@ -13,7 +13,7 @@ import {
   Ruler,
   TriangleAlert,
   X,
-} from 'lucide-react-native';
+} from '@/components/ui/icons';
 import { useEffect, useState } from 'react';
 import {
   Animated,

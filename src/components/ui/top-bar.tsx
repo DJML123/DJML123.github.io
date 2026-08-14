@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useColorScheme } from 'nativewind';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AppText as Text, AppTextInput as TextInput } from '@/components/ui/app-text';
-import { Search, X } from 'lucide-react-native';
+import { Search, X } from '@/components/ui/icons';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import type { GeocodeResult } from '@/components/map/use-geocode-search';
 import { useGeocodeSearch } from '@/components/map/use-geocode-search';

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useColorScheme } from 'nativewind';
 import { AppText as Text } from '@/components/ui/app-text';
 import { Animated, Pressable, View } from 'react-native';
-import type { LucideIcon } from 'lucide-react-native';
+import type { LucideIcon } from '@/components/ui/icons';
 
 /** A segmented control with a sliding pill indicator instead of just swapping background classes per option. */
 export function AnimatedSegmented<T extends string>({

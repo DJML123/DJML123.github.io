@@ -1,4 +1,4 @@
-import { Plus } from 'lucide-react-native';
+import { Plus } from '@/components/ui/icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable } from 'react-native';
 import { usePrefs } from '@/constants/prefs-context';

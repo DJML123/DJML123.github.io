@@ -1,4 +1,4 @@
-import { ChevronLeft, X } from 'lucide-react-native';
+import { ChevronLeft, X } from '@/components/ui/icons';
 import { useEffect, useState } from 'react';
 import { Animated, Easing, Modal, PanResponder, Pressable, ScrollView, useWindowDimensions, View } from 'react-native';
 

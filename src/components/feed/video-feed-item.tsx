@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AppText as Text } from '@/components/ui/app-text';
-import { Heart, MapPin, TriangleAlert, UserPlus } from 'lucide-react-native';
+import { Heart, MapPin, TriangleAlert, UserPlus } from '@/components/ui/icons';
 import { useRef, useState } from 'react';
 import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
 import type { VideoFeedItem } from '@/constants/mock-data';

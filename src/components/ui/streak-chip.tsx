@@ -1,4 +1,4 @@
-import { Flame } from 'lucide-react-native';
+import { Flame } from '@/components/ui/icons';
 import { useColorScheme } from 'nativewind';
 import { View } from 'react-native';
 import { AppText as Text } from '@/components/ui/app-text';

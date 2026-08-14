@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { BottomSheetModal } from './bottom-sheet-modal';
 import { AppText as Text } from '@/components/ui/app-text';
 import { Linking, Modal, Pressable, StyleSheet, View } from 'react-native';
-import { Bell, Cloud, Coins, Gem, Info, Lock, Map, MapPin, MonitorPlay, Moon, Radio, Rocket, Ruler, Sun, Users, Wifi, type LucideIcon } from 'lucide-react-native';
+import { Bell, Cloud, Coins, Gem, Info, Lock, Map, MapPin, MonitorPlay, Moon, Radio, Rocket, Ruler, Sun, Users, Wifi, type LucideIcon } from '@/components/ui/icons';
 import { usePrefs } from '@/constants/prefs-context';
 import { useSocial } from '@/constants/social-context';
 import { ACCENTS, accentOf } from '@/constants/accent';

@@ -82,11 +82,18 @@ Gutschriften.
 Jeder Push auf `main` baut über `.github/workflows/deploy.yml` mit
 `npx expo export --platform web` und veröffentlicht `dist/` auf GitHub Pages.
 
-Die Supabase-Variablen sind im Build bewusst nicht gesetzt, die
-veröffentlichte Seite läuft also rein lokal. Sollen sie mit: als Repository-Secrets
-hinterlegen und im Workflow-Schritt als `env` durchreichen. `EXPO_PUBLIC_*`
-landet dabei im ausgelieferten Bundle – beim anon Key ist das vorgesehen, RLS
-schützt die Daten.
+Damit die veröffentlichte Seite Supabase nutzt, müssen die beiden Variablen als
+Repository-Secrets hinterlegt sein – der Workflow reicht sie bereits durch:
+
+```bash
+gh secret set EXPO_PUBLIC_SUPABASE_URL
+gh secret set EXPO_PUBLIC_SUPABASE_ANON_KEY
+```
+
+Ohne die Secrets baut der Workflow weiterhin durch, die Seite läuft dann nur
+lokal. `EXPO_PUBLIC_*` landet im ausgelieferten Bundle – beim anon Key ist das
+so vorgesehen, RLS schützt die Daten. Der `service_role` Key gehört **niemals**
+hierher.
 
 ## Lizenz
 

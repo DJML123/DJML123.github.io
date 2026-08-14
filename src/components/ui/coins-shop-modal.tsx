@@ -1,4 +1,4 @@
-import { Gift, Share2 } from 'lucide-react-native';
+import { Gift, Share2 } from '@/components/ui/icons';
 import { useState } from 'react';
 import { Pressable, Share, TextInput, View } from 'react-native';import { AppText as Text } from '@/components/ui/app-text';
 import { useCoins } from '@/constants/coins-context';

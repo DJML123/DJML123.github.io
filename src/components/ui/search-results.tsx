@@ -1,4 +1,4 @@
-import { Clock, MapPin, SearchX } from 'lucide-react-native';
+import { Clock, MapPin, SearchX } from '@/components/ui/icons';
 import { Pressable, View } from 'react-native';
 
 import { AppText as Text } from '@/components/ui/app-text';

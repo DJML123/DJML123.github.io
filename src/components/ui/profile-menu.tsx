@@ -1,7 +1,7 @@
 import { AppText as Text } from '@/components/ui/app-text';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useColorScheme } from 'nativewind';
-import { Activity, Bookmark, Coins, Flame, Gem, LogOut, Settings, Smile, Trophy, User, Users, type LucideIcon } from 'lucide-react-native';
+import { Activity, Bookmark, Coins, Flame, Gem, LogOut, Settings, Smile, Trophy, User, Users, type LucideIcon } from '@/components/ui/icons';
 import { Pressable, View } from 'react-native';
 import { useAuth } from '@/constants/auth-context';
 import { useDonations } from '@/constants/donations-context';

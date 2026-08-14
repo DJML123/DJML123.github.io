@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { DialogIn } from './sheet-in';
-import { ImagePlus, MailCheck, Trash2 } from 'lucide-react-native';
+import { ImagePlus, MailCheck, Trash2 } from '@/components/ui/icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as ImagePicker from 'expo-image-picker';
 import { Modal, Pressable, StyleSheet, View } from 'react-native';

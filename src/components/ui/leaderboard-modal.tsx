@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { BottomSheetModal } from './bottom-sheet-modal';
 import { AppText as Text } from '@/components/ui/app-text';
-import { Medal } from 'lucide-react-native';
+import { Medal } from '@/components/ui/icons';
 import { View } from 'react-native';
 import { useDonations } from '@/constants/donations-context';
 import { formatEuro } from '@/services/repository';

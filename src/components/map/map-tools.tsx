@@ -1,4 +1,4 @@
-import { LocateFixed, Loader } from 'lucide-react-native';
+import { LocateFixed, Loader } from '@/components/ui/icons';
 import { useColorScheme } from 'nativewind';
 import { Pressable, View } from 'react-native';
 

@@ -1,5 +1,5 @@
 import * as ImagePicker from 'expo-image-picker';
-import { Check, Crown, Dices, Lock, Sparkles } from 'lucide-react-native';
+import { Check, Crown, Dices, Lock, Sparkles } from '@/components/ui/icons';
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { AppText as Text } from '@/components/ui/app-text';

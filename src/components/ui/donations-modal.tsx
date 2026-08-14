@@ -1,4 +1,4 @@
-import { Apple, Coins, CreditCard, Smartphone, Wallet } from 'lucide-react-native';
+import { Apple, Coins, CreditCard, Smartphone, Wallet } from '@/components/ui/icons';
 import { BottomSheetModal } from './bottom-sheet-modal';
 import { AppText as Text } from '@/components/ui/app-text';
 import { View } from 'react-native';

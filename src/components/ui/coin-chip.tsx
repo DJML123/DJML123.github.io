@@ -1,4 +1,4 @@
-import { Coins } from 'lucide-react-native';
+import { Coins } from '@/components/ui/icons';
 import { useColorScheme } from 'nativewind';
 import { Pressable, View } from 'react-native';
 import { AppText as Text } from '@/components/ui/app-text';

@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Bookmark, Map, MonitorPlay, Plus, Users, type LucideIcon } from 'lucide-react-native';
+import { Bookmark, Map, MonitorPlay, Plus, Users, type LucideIcon } from '@/components/ui/icons';
 import { useColorScheme } from 'nativewind';
 import { useState } from 'react';
 import { Animated, Pressable, View } from 'react-native';

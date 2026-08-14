@@ -28,7 +28,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Supabase, if it is configured. Both variables are read at build time and
+      # inlined into the bundle - that is what the EXPO_PUBLIC_ prefix means, and
+      # it is correct here: the anon key is a public identifier and row-level
+      # security is what protects the data. The service_role key must never be
+      # put here; it bypasses RLS entirely.
+      #
+      # Unset secrets arrive as empty strings, which isBackendConfigured() reads
+      # as "no backend" - so the build keeps working on a fork or before the
+      # secrets exist, and the app simply stays local-only.
       - run: npx expo export --platform web
+        env:
+          EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
+          EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

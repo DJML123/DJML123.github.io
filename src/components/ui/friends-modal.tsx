@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { MessageCircle, Search, UserPlus, Users } from 'lucide-react-native';
+import { MessageCircle, Search, UserPlus, Users } from '@/components/ui/icons';
 import { useMemo, useState } from 'react';
 import { Pressable, View } from 'react-native';
 

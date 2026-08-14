@@ -1,4 +1,4 @@
-import { MapPin } from 'lucide-react-native';
+import { MapPin } from '@/components/ui/icons';
 import { BottomSheetModal } from './bottom-sheet-modal';
 import { AppText as Text } from '@/components/ui/app-text';
 import { Pressable, View } from 'react-native';

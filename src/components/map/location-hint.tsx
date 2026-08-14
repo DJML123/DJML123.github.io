@@ -1,4 +1,4 @@
-import { Crosshair, Lock, ShieldAlert, X } from 'lucide-react-native';
+import { Crosshair, Lock, ShieldAlert, X } from '@/components/ui/icons';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 
 import { AppText as Text } from '@/components/ui/app-text';

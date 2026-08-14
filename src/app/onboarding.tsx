@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Bell, Compass, Heart, Radio, Users, type LucideIcon } from 'lucide-react-native';
+import { Bell, Compass, Heart, Radio, Users, type LucideIcon } from '@/components/ui/icons';
 import { useEffect, useState } from 'react';
 import { Animated, Easing, Pressable, ScrollView, View } from 'react-native';
 

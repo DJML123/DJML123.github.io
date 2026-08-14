@@ -1,4 +1,4 @@
-import { ArrowLeft, X } from 'lucide-react-native';
+import { ArrowLeft, X } from '@/components/ui/icons';
 import { Pressable, View } from 'react-native';
 import { AppText as Text } from '@/components/ui/app-text';
 
