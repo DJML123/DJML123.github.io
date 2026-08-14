@@ -16,6 +16,7 @@ import { CREATORS, GENRES, recommendedCreators } from '@/constants/mock-data';
 import { usePrefs } from '@/constants/prefs-context';
 import { accentOf } from '@/constants/accent';
 import { useSocial } from '@/constants/social-context';
+import { useApproxLocation } from '@/constants/use-approx-location';
 import { haptics } from '@/services/haptics';
 
 /** What the user wants out of the app. Local to the funnel - it only tailors
@@ -287,7 +288,12 @@ function CreatorStep({
   isFollowing: (name: string) => boolean;
   onToggle: (name: string) => void;
 }) {
-  const picks = recommendedCreators(genres, 6);
+  // Ranked against roughly where the user is, so this screen suggests the
+  // local scene rather than the six biggest accounts on earth. Until the
+  // lookup returns, `near` is null and the ranking leads with the launch
+  // market - never with an empty list.
+  const near = useApproxLocation();
+  const picks = recommendedCreators(genres, 6, near);
   const genreNames = GENRES.filter((g) => genres.includes(g.key))
     .map((g) => g.label)
     .join(', ');
@@ -299,7 +305,11 @@ function CreatorStep({
       <Heading
         eyebrow="Für dich ausgewählt"
         title={'Diese\nCreator\npassen zu dir'}
-        subtitle={genreNames ? `Basierend auf: ${genreNames}. Folgen kannst du jederzeit ändern.` : 'Die größten Namen auf der Plattform.'}
+        subtitle={
+          genreNames
+            ? `Basierend auf: ${genreNames}${near ? ' und deiner Umgebung' : ''}. Folgen kannst du jederzeit ändern.`
+            : 'Wer gerade in deiner Nähe sendet.'
+        }
       />
       <View className="gap-2.5">
         {picks.map((c) => {

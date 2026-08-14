@@ -218,6 +218,118 @@ export const GENRES: { key: Genre; label: string; emoji: string }[] = [
   { key: 'nature', label: 'Natur', emoji: '🏔️' },
 ];
 
+/**
+ * Where each city on the roster is, so "near me" is something the app can
+ * actually compute.
+ *
+ * The creators used to carry a city *name* and nothing else, which meant every
+ * suggestion the app made was global and identical no matter where the user
+ * opened it - and the map only ever had content in Berlin. Coordinates turn
+ * both of those into a distance calculation.
+ *
+ * City centres, one decimal place of precision beyond what matters: these
+ * position a marker in the right district, and the roster is fictional anyway.
+ */
+export const CITY_COORDS: Record<string, Coordinates> = {
+  // Launch market first - see LAUNCH_MARKET below.
+  Berlin: { lng: 13.405, lat: 52.52 },
+  Hamburg: { lng: 9.9937, lat: 53.5511 },
+  München: { lng: 11.582, lat: 48.1351 },
+  Köln: { lng: 6.9603, lat: 50.9375 },
+  'Frankfurt am Main': { lng: 8.6821, lat: 50.1109 },
+  Stuttgart: { lng: 9.1829, lat: 48.7758 },
+  Düsseldorf: { lng: 6.7735, lat: 51.2277 },
+  Leipzig: { lng: 12.3731, lat: 51.3397 },
+  Dresden: { lng: 13.7373, lat: 51.0504 },
+  Hannover: { lng: 9.732, lat: 52.3759 },
+  Nürnberg: { lng: 11.0767, lat: 49.4521 },
+  Bremen: { lng: 8.8017, lat: 53.0793 },
+  Dortmund: { lng: 7.4653, lat: 51.5136 },
+  Essen: { lng: 7.0116, lat: 51.4556 },
+  Freiburg: { lng: 7.8421, lat: 47.999 },
+  Münster: { lng: 7.6261, lat: 51.9607 },
+  Mannheim: { lng: 8.4661, lat: 49.4875 },
+  Karlsruhe: { lng: 8.4037, lat: 49.0069 },
+  Bonn: { lng: 7.0982, lat: 50.7374 },
+  Kiel: { lng: 10.1228, lat: 54.3233 },
+  Augsburg: { lng: 10.8978, lat: 48.3705 },
+  Rostock: { lng: 12.0991, lat: 54.0924 },
+
+  // The rest of the world.
+  Amsterdam: { lng: 4.9041, lat: 52.3676 },
+  Athen: { lng: 23.7275, lat: 37.9838 },
+  Auckland: { lng: 174.7633, lat: -36.8485 },
+  Austin: { lng: -97.7431, lat: 30.2672 },
+  Bali: { lng: 115.1889, lat: -8.4095 },
+  Bangkok: { lng: 100.5018, lat: 13.7563 },
+  Barcelona: { lng: 2.1734, lat: 41.3851 },
+  Bogotá: { lng: -74.0721, lat: 4.711 },
+  Budapest: { lng: 19.0402, lat: 47.4979 },
+  'Buenos Aires': { lng: -58.3816, lat: -34.6037 },
+  Chicago: { lng: -87.6298, lat: 41.8781 },
+  Delhi: { lng: 77.1025, lat: 28.7041 },
+  Dubai: { lng: 55.2708, lat: 25.2048 },
+  Dublin: { lng: -6.2603, lat: 53.3498 },
+  'El Chaltén': { lng: -72.8864, lat: -49.3315 },
+  Helsinki: { lng: 24.9384, lat: 60.1699 },
+  'Ho-Chi-Minh-Stadt': { lng: 106.6297, lat: 10.8231 },
+  Innsbruck: { lng: 11.4041, lat: 47.2692 },
+  Istanbul: { lng: 28.9784, lat: 41.0082 },
+  Kairo: { lng: 31.2357, lat: 30.0444 },
+  Kapstadt: { lng: 18.4241, lat: -33.9249 },
+  Lagos: { lng: 3.3792, lat: 6.5244 },
+  Lima: { lng: -77.0428, lat: -12.0464 },
+  Lissabon: { lng: -9.1393, lat: 38.7223 },
+  London: { lng: -0.1276, lat: 51.5072 },
+  'Los Angeles': { lng: -118.2437, lat: 34.0522 },
+  Mailand: { lng: 9.19, lat: 45.4642 },
+  Manila: { lng: 120.9842, lat: 14.5995 },
+  Marrakesch: { lng: -7.9811, lat: 31.6295 },
+  'Mexiko-Stadt': { lng: -99.1332, lat: 19.4326 },
+  Miami: { lng: -80.1918, lat: 25.7617 },
+  Mumbai: { lng: 72.8777, lat: 19.076 },
+  Nairobi: { lng: 36.8219, lat: -1.2921 },
+  'New York': { lng: -74.006, lat: 40.7128 },
+  Osaka: { lng: 135.5023, lat: 34.6937 },
+  Paris: { lng: 2.3522, lat: 48.8566 },
+  Prag: { lng: 14.4378, lat: 50.0755 },
+  'Reykjavík': { lng: -21.9426, lat: 64.1466 },
+  'Rio de Janeiro': { lng: -43.1729, lat: -22.9068 },
+  'San Francisco': { lng: -122.4194, lat: 37.7749 },
+  Seoul: { lng: 126.978, lat: 37.5665 },
+  Shanghai: { lng: 121.4737, lat: 31.2304 },
+  Singapur: { lng: 103.8198, lat: 1.3521 },
+  Stockholm: { lng: 18.0686, lat: 59.3293 },
+  Sydney: { lng: 151.2093, lat: -33.8688 },
+  Taipeh: { lng: 121.5654, lat: 25.033 },
+  'Tel Aviv': { lng: 34.7818, lat: 32.0853 },
+  Tokio: { lng: 139.6917, lat: 35.6895 },
+  Toronto: { lng: -79.3832, lat: 43.6532 },
+  Warschau: { lng: 21.0122, lat: 52.2297 },
+  Wien: { lng: 16.3738, lat: 48.2082 },
+  'Zürich': { lng: 8.5417, lat: 47.3769 },
+};
+
+/**
+ * The market OnSpot is trying to win first.
+ *
+ * The plan is international - open the app anywhere and it suggests people
+ * around you - but a social product only becomes worth opening once one place
+ * is dense enough that there is always something happening. Spreading thin
+ * across 44 countries gets you 44 empty cities. So German creators are ranked
+ * ahead of equally-close foreign ones, and the roster below covers German
+ * cities far more thoroughly than anywhere else.
+ *
+ * When Germany carries itself, drop the boost to 1 (or set it per country) and
+ * the same ranking works unchanged for the next market.
+ */
+export const LAUNCH_MARKET = '🇩🇪';
+/** How much closer a launch-market creator feels than they are, in kilometres
+ *  of "virtual" head start. 400km covers Germany end to end, so within the
+ *  country the ranking is effectively distance-only, and abroad the local
+ *  German scene still surfaces before an equally distant foreign one. */
+const LAUNCH_BOOST_KM = 400;
+
 export interface Creator {
   name: string;
   city: string;
@@ -234,6 +346,32 @@ export interface Creator {
  *  photos - no real person is represented here. Used for onboarding
  *  recommendations, the friends list and the feed. */
 export const CREATORS: Creator[] = [
+  // --- Startmarkt Deutschland -------------------------------------------
+  // Deliberately smaller follower counts than the international roster: a
+  // launch market is made of people with a few thousand viewers, not of
+  // half-million-follower accounts, and pretending otherwise is the kind of
+  // detail that makes a product feel fake to exactly the people it needs.
+  { name: 'HafenLiveHH', city: 'Hamburg', flag: '🇩🇪', genres: ['travel', 'food'], followers: 8_400, isLive: true, avatarUrl: avatar('hafen-hh') },
+  { name: 'IsarSessions', city: 'München', flag: '🇩🇪', genres: ['music', 'nature'], followers: 12_700, isLive: false, avatarUrl: avatar('isar') },
+  { name: 'MainhattanEats', city: 'Frankfurt am Main', flag: '🇩🇪', genres: ['food', 'nightlife'], followers: 6_900, isLive: true, avatarUrl: avatar('mainhattan') },
+  { name: 'KesselKlub', city: 'Stuttgart', flag: '🇩🇪', genres: ['nightlife', 'music'], followers: 5_300, isLive: false, avatarUrl: avatar('kessel') },
+  { name: 'RheinRunner', city: 'Düsseldorf', flag: '🇩🇪', genres: ['sport', 'fitness'], followers: 9_100, isLive: true, avatarUrl: avatar('rhein') },
+  { name: 'LeipzigLoft', city: 'Leipzig', flag: '🇩🇪', genres: ['art', 'nightlife'], followers: 14_200, isLive: true, avatarUrl: avatar('leipzig') },
+  { name: 'ElbflorenzArt', city: 'Dresden', flag: '🇩🇪', genres: ['art', 'travel'], followers: 4_800, isLive: false, avatarUrl: avatar('dresden') },
+  { name: 'HannoverHustle', city: 'Hannover', flag: '🇩🇪', genres: ['gaming', 'tech'], followers: 7_600, isLive: true, avatarUrl: avatar('hannover') },
+  { name: 'FrankenFrames', city: 'Nürnberg', flag: '🇩🇪', genres: ['art', 'food'], followers: 3_900, isLive: false, avatarUrl: avatar('nuernberg') },
+  { name: 'WeserWanderer', city: 'Bremen', flag: '🇩🇪', genres: ['nature', 'travel'], followers: 5_100, isLive: false, avatarUrl: avatar('bremen') },
+  { name: 'RevierGaming', city: 'Dortmund', flag: '🇩🇪', genres: ['gaming', 'sport'], followers: 21_500, isLive: true, avatarUrl: avatar('dortmund') },
+  { name: 'RuhrpottBeats', city: 'Essen', flag: '🇩🇪', genres: ['music', 'nightlife'], followers: 11_300, isLive: false, avatarUrl: avatar('essen') },
+  { name: 'SchwarzwaldSteps', city: 'Freiburg', flag: '🇩🇪', genres: ['nature', 'fitness'], followers: 6_200, isLive: true, avatarUrl: avatar('freiburg') },
+  { name: 'MuensterRad', city: 'Münster', flag: '🇩🇪', genres: ['sport', 'nature'], followers: 4_400, isLive: false, avatarUrl: avatar('muenster') },
+  { name: 'QuadratKitchen', city: 'Mannheim', flag: '🇩🇪', genres: ['food', 'art'], followers: 3_600, isLive: false, avatarUrl: avatar('mannheim') },
+  { name: 'KarlsruheCode', city: 'Karlsruhe', flag: '🇩🇪', genres: ['tech', 'gaming'], followers: 15_800, isLive: true, avatarUrl: avatar('karlsruhe') },
+  { name: 'BonnBeisl', city: 'Bonn', flag: '🇩🇪', genres: ['food', 'travel'], followers: 2_900, isLive: false, avatarUrl: avatar('bonn') },
+  { name: 'FoerdeFunk', city: 'Kiel', flag: '🇩🇪', genres: ['nature', 'sport'], followers: 3_300, isLive: true, avatarUrl: avatar('kiel') },
+  { name: 'AugsburgAfterWork', city: 'Augsburg', flag: '🇩🇪', genres: ['nightlife', 'music'], followers: 2_400, isLive: false, avatarUrl: avatar('augsburg') },
+  { name: 'OstseeOnAir', city: 'Rostock', flag: '🇩🇪', genres: ['travel', 'nature'], followers: 4_100, isLive: true, avatarUrl: avatar('rostock') },
+
   { name: 'LiveWithMax', city: 'Berlin', flag: '🇩🇪', genres: ['food', 'travel'], followers: 128_400, isLive: true, avatarUrl: avatar('max') },
   { name: 'NightRiderTV', city: 'Berlin', flag: '🇩🇪', genres: ['nightlife', 'sport'], followers: 64_200, isLive: true, avatarUrl: avatar('nightrider') },
   { name: 'ArcadeCrew', city: 'Köln', flag: '🇩🇪', genres: ['gaming', 'tech'], followers: 41_900, isLive: false, avatarUrl: avatar('gaming-night') },
@@ -298,12 +436,110 @@ export const CREATORS: Creator[] = [
 /** Creators matching any of the picked genres, strongest first. With nothing
  *  picked the roster still has to produce something, so it falls back to the
  *  biggest names rather than an empty list. */
-export function recommendedCreators(genres: string[], limit = 6): Creator[] {
-  const ranked = [...CREATORS].sort((a, b) => b.followers - a.followers);
-  if (genres.length === 0) return ranked.slice(0, limit);
-  const matches = ranked.filter((c) => c.genres.some((g) => genres.includes(g)));
-  return (matches.length > 0 ? matches : ranked).slice(0, limit);
+/** Great-circle distance in kilometres. */
+export function distanceKm(a: Coordinates, b: Coordinates): number {
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const R = 6371;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
 }
+
+/** Where a creator broadcasts from. Unknown cities fall back to Berlin so a
+ *  typo in the roster can never drop someone off the map silently. */
+export function creatorCoords(c: Creator): Coordinates {
+  return CITY_COORDS[c.city] ?? CITY_COORDS.Berlin;
+}
+
+/**
+ * How far away a creator *feels*, which is what the ranking sorts on.
+ *
+ * Real distance, minus a head start for the launch market. Everything else
+ * being equal a German creator therefore outranks a foreign one, and inside
+ * Germany the boost cancels out on both sides and it is plain distance again.
+ */
+function rankingDistance(c: Creator, near: Coordinates): number {
+  const km = distanceKm(near, creatorCoords(c));
+  return c.flag === LAUNCH_MARKET ? km - LAUNCH_BOOST_KM : km;
+}
+
+/**
+ * Who to suggest, in order.
+ *
+ * Taste first, proximity second, reach last. The old version sorted the whole
+ * world by follower count, so every user on earth got the same six global
+ * accounts - which is the opposite of what a "see what is happening around
+ * you" app should recommend. With a location it now answers "who is near me
+ * and makes the kind of thing I watch", and without one it falls back to the
+ * launch market rather than to whoever is biggest.
+ */
+export function recommendedCreators(
+  genres: string[],
+  limit = 6,
+  near?: Coordinates | null
+): Creator[] {
+  const matches =
+    genres.length > 0 ? CREATORS.filter((c) => c.genres.some((g) => genres.includes(g))) : [];
+  const pool = matches.length > 0 ? matches : [...CREATORS];
+
+  if (!near) {
+    // No position yet: lead with the launch market, then by reach. Note this
+    // is the first screen of onboarding, where the IP lookup often has not
+    // come back yet - so it must still produce a sensible list.
+    return [...pool]
+      .sort((a, b) => {
+        const market = Number(b.flag === LAUNCH_MARKET) - Number(a.flag === LAUNCH_MARKET);
+        return market !== 0 ? market : b.followers - a.followers;
+      })
+      .slice(0, limit);
+  }
+
+  return [...pool]
+    .sort((a, b) => {
+      const d = rankingDistance(a, near) - rankingDistance(b, near);
+      // Within ~15km the difference is noise (same city), so reach decides.
+      return Math.abs(d) > 15 ? d : b.followers - a.followers;
+    })
+    .slice(0, limit);
+}
+
+/**
+ * Every creator, as a map marker at their city.
+ *
+ * This is what makes the map international. It used to hold four hard-coded
+ * spots in Berlin, so opening the app anywhere else showed a basemap and
+ * nothing else - no reason to come back, which is the single biggest thing
+ * wrong with the product. Now each creator sits in their own city, offset by a
+ * deterministic jitter so a city with several of them does not stack every
+ * marker on one pixel.
+ *
+ * Still demo content, and labelled as such in the UI.
+ */
+export const CREATOR_SPOTS: Spot[] = CREATORS.map((c, i) => {
+  const base = creatorCoords(c);
+  // Deterministic scatter, roughly +/-2km, from the name so it never moves
+  // between renders or reloads.
+  const h = hashSeed(c.name);
+  const jitterLng = (((h % 400) - 200) / 100) * 0.014;
+  const jitterLat = ((((h >> 9) % 400) - 200) / 100) * 0.009;
+  return {
+    id: `creator-${i}`,
+    type: 'streamer' as const,
+    title: c.name,
+    subtitle: c.isLive ? `Live aus ${c.city}` : `Zuletzt live • ${c.city}`,
+    coords: { lng: base.lng + jitterLng, lat: base.lat + jitterLat },
+    avatarUrl: c.avatarUrl,
+    isLive: c.isLive,
+    category: c.isLive ? ('live' as const) : ('all' as const),
+    viewers: c.isLive ? Math.max(12, Math.round(c.followers / 90)) : undefined,
+  };
+});
+
+/** The seeded Berlin events plus every creator on the roster. */
+export const ALL_SPOTS: Spot[] = [...SPOTS, ...CREATOR_SPOTS];
 
 /**
  * The filter row.

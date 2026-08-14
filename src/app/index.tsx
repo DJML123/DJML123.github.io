@@ -24,7 +24,7 @@ import { SavedSpotsModal } from '@/components/ui/saved-spots-modal';
 import { SettingsModal } from '@/components/ui/settings-modal';
 import { SubscriptionModal } from '@/components/ui/subscription-modal';
 import { TopBar } from '@/components/ui/top-bar';
-import { avatar, SPOTS, type Category, type Spot, type ViewTab } from '@/constants/mock-data';
+import { ALL_SPOTS, avatar, type Category, type Spot, type ViewTab } from '@/constants/mock-data';
 import { useAuth } from '@/constants/auth-context';
 import { usePrefs } from '@/constants/prefs-context';
 import { useSaved } from '@/constants/saved-context';
@@ -92,7 +92,7 @@ export default function OnSpotScreen() {
   // The user picks the filter themselves; "Alle" (the default) shows everything.
   const [category, setCategory] = useState<Category>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [spots, setSpots] = useState<Spot[]>(SPOTS);
+  const [spots, setSpots] = useState<Spot[]>(ALL_SPOTS);
   const [mapOverlayOpen, setMapOverlayOpen] = useState(false);
   const [activeSpotId, setActiveSpotId] = useState<string | undefined>();
   const [authVisible, setAuthVisible] = useState(false);
@@ -149,7 +149,17 @@ export default function OnSpotScreen() {
       type,
       title,
       subtitle: subtitle || 'Neu erstellt',
-      coords: { lng: 13.405 + (Math.random() - 0.5) * 0.05, lat: 52.52 + (Math.random() - 0.5) * 0.05 },
+      // Where the user is actually looking, not Berlin. Creating a spot in
+      // Hamburg used to drop it 250km away, which made the feature useless
+      // anywhere but the one city the demo data was written for.
+      coords: (() => {
+        const center = mapRef.current?.getCenter();
+        const base = center ?? { lng: 13.405, lat: 52.52 };
+        return {
+          lng: base.lng + (Math.random() - 0.5) * 0.02,
+          lat: base.lat + (Math.random() - 0.5) * 0.02,
+        };
+      })(),
       avatarUrl: avatar(title + Date.now()),
       category: 'all',
       isLive: type === 'streamer',

@@ -4,7 +4,8 @@ import { useMemo, useState } from 'react';
 import { Pressable, View } from 'react-native';
 
 import { AppText as Text, AppTextInput as TextInput } from '@/components/ui/app-text';
-import { CREATORS } from '@/constants/mock-data';
+import { CREATORS, creatorCoords, distanceKm, LAUNCH_MARKET } from '@/constants/mock-data';
+import { useApproxLocation } from '@/constants/use-approx-location';
 import { useAuth } from '@/constants/auth-context';
 import { useSocial } from '@/constants/social-context';
 import { usePrefs } from '@/constants/prefs-context';
@@ -97,6 +98,7 @@ export function FriendsModal({
   const [chatWith, setChatWith] = useState<string | null>(null);
   const [tab, setTab] = useState<'chats' | 'friends'>('chats');
   const [query, setQuery] = useState('');
+  const near = useApproxLocation();
 
   const visibleCreators = useMemo(() => CREATORS.filter((c) => !isBlocked(c.name)), [isBlocked]);
 
@@ -110,9 +112,21 @@ export function FriendsModal({
 
   const match = (name: string) => name.toLowerCase().includes(query.trim().toLowerCase());
   const followed = visibleCreators.filter((c) => isFollowing(c.name) && match(c.name));
+  // Suggestions are ranked by distance, not by reach, with the launch market
+  // given a head start - the same rule the onboarding screen uses. Sorting the
+  // whole roster by follower count meant a user in Kiel was offered Tokyo and
+  // New York, which is the opposite of what this app is for.
   const suggested = visibleCreators
     .filter((c) => !isFollowing(c.name) && match(c.name))
-    .sort((x, y) => y.followers - x.followers);
+    .sort((x, y) => {
+      if (!near) {
+        const market = Number(y.flag === LAUNCH_MARKET) - Number(x.flag === LAUNCH_MARKET);
+        return market !== 0 ? market : y.followers - x.followers;
+      }
+      const dx = distanceKm(near, creatorCoords(x)) - (x.flag === LAUNCH_MARKET ? 400 : 0);
+      const dy = distanceKm(near, creatorCoords(y)) - (y.flag === LAUNCH_MARKET ? 400 : 0);
+      return Math.abs(dx - dy) > 15 ? dx - dy : y.followers - x.followers;
+    });
 
   const creatorOf = (name: string) => CREATORS.find((c) => c.name === name);
 
@@ -255,7 +269,9 @@ export function FriendsModal({
                 <View className="flex-1">
                   <Text className="text-sm font-bold text-neutral-900 dark:text-white">{c.name}</Text>
                   <Text className="mt-0.5 text-[10px] text-neutral-400 dark:text-neutral-500">
-                    {c.flag} {c.city} · {formatFollowers(c.followers)} Follower
+                    {c.flag} {c.city}
+                    {near ? ` · ${Math.round(distanceKm(near, creatorCoords(c)))} km` : ''} ·{' '}
+                    {formatFollowers(c.followers)} Follower
                   </Text>
                 </View>
                 <Pressable
