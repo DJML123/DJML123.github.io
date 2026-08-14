@@ -1,6 +1,7 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AppText as Text } from '@/components/ui/app-text';
+import { DemoBadge } from '@/components/ui/demo-badge';
 import { Heart, MapPin, TriangleAlert, UserPlus } from '@/components/ui/icons';
 import { useRef, useState } from 'react';
 import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
@@ -103,16 +104,23 @@ export function VideoFeedCard({ item }: { item: VideoFeedItem }) {
           top bar: the search field's own shadow reaches ~130px, and at top-28
           the Live badge was half-hidden behind it. */}
       <View className="absolute left-4 right-4 top-36 z-50 flex-row items-center justify-between">
-        {item.isLive ? (
-          <View className="flex-row items-center gap-1.5 rounded-full bg-red-500 px-3 py-1 shadow-lg shadow-red-500/40 glow-red">
-            <View className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
-            <Text className="text-[11px] font-bold uppercase tracking-wide text-white">Live</Text>
-          </View>
-        ) : (
-          <View className="rounded-full bg-black/45 px-3 py-1">
-            <Text className="text-[11px] font-bold uppercase tracking-wide text-white/80">Aufzeichnung</Text>
-          </View>
-        )}
+        <View className="flex-row items-center gap-2">
+          {item.isLive ? (
+            <View className="flex-row items-center gap-1.5 rounded-full bg-red-500 px-3 py-1 shadow-lg shadow-red-500/40 glow-red">
+              <View className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
+              <Text className="text-[11px] font-bold uppercase tracking-wide text-white">Live</Text>
+            </View>
+          ) : (
+            <View className="rounded-full bg-black/45 px-3 py-1">
+              <Text className="text-[11px] font-bold uppercase tracking-wide text-white/80">Aufzeichnung</Text>
+            </View>
+          )}
+          {/* Right next to the Live badge, because that badge is the strongest
+              claim on the screen: the clip is a still image from a stock photo
+              service, the viewer count and the distance are invented, and
+              nothing here is being broadcast by anyone. */}
+          <DemoBadge />
+        </View>
         <View className="flex-row items-center gap-1 rounded-full bg-black/45 px-3 py-1">
           <MapPin size={11} color="#ffffff" />
           <Text className="text-[11px] font-semibold text-white">{formatDistance(item.distanceMeters)}</Text>

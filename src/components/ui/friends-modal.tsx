@@ -11,6 +11,7 @@ import { usePrefs } from '@/constants/prefs-context';
 import { accentOf } from '@/constants/accent';
 import { AnimatedSegmented } from './animated-segmented';
 import { BottomSheetModal } from './bottom-sheet-modal';
+import { DemoNote } from './demo-badge';
 import { ChatModal } from './chat-modal';
 
 /** `128400` -> `128K`. */
@@ -127,6 +128,9 @@ export function FriendsModal({
             value={tab}
             onChange={setTab}
           />
+          {/* The whole roster is invented, follower counts included, and the
+              replies are canned. Said once here rather than on every row. */}
+          <DemoNote className="mt-3" />
         </View>
 
         {tab === 'chats' ? (

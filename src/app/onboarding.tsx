@@ -8,6 +8,7 @@ import { AppText as Text } from '@/components/ui/app-text';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { ConfettiBurst } from '@/components/ui/confetti';
 import { PrimaryButton } from '@/components/ui/primary-button';
+import { DemoNote } from '@/components/ui/demo-badge';
 import { SelectCard } from '@/components/ui/select-card';
 import { StepProgress } from '@/components/ui/step-progress';
 import { Avatar } from '@/components/ui/avatar';
@@ -224,6 +225,10 @@ function IntroStep() {
         <Stat value={String(live)} label="Live jetzt" accent />
         <Stat value={String(countries)} label="Länder" />
       </View>
+      {/* These three read like platform metrics, and a new visitor has no way
+          to know they come from a demo roster. Saying so here costs one line
+          and is the difference between a preview and a false claim. */}
+      <DemoNote className="mt-3" />
     </View>
   );
 }

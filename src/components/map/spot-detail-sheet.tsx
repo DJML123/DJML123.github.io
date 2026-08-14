@@ -28,6 +28,7 @@ import {
 } from 'react-native';
 import { KIND_HEX, SpotGlyph } from '@/components/map/spot-marker';
 import { PoiCover } from '@/components/map/poi-cover';
+import { DemoBadge } from '@/components/ui/demo-badge';
 import type { Spot } from '@/constants/mock-data';
 import { usePrefs, type Units } from '@/constants/prefs-context';
 import { accentOf } from '@/constants/accent';
@@ -267,6 +268,10 @@ export function SpotDetailSheet({
         </View>
 
         <View className="mt-3 flex-row flex-wrap items-center gap-2">
+          {/* Streams and events are the app's own demo content - viewer counts
+              and distances included. Places come from the vector tiles and are
+              real, so they carry no marker. */}
+          {(current.type === 'streamer' || current.type === 'event') && <DemoBadge tone="light" />}
           {current.isLive ? (
             <View className="flex-row items-center gap-1.5 rounded-full bg-red-500 px-2.5 py-1">
               <View className="h-1.5 w-1.5 rounded-full bg-white" />
