@@ -42,6 +42,9 @@ export function MapTools({
     <Pressable
       onPress={onLocate}
       hitSlop={6}
+      accessibilityRole="button"
+      accessibilityLabel="Standort anzeigen"
+      accessibilityState={{ busy: locating }}
       className="absolute bottom-32 right-4 z-40 active:opacity-50"
     >
       <Surface className="h-12 w-12 items-center justify-center rounded-[20px]">

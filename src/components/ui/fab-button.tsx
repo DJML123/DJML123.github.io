@@ -9,7 +9,12 @@ export function FabButton({ onPress, hidden = false }: { onPress: () => void; hi
   const a = accentOf(accent);
   if (hidden) return null;
   return (
-    <Pressable onPress={onPress} className="absolute bottom-52 right-5 z-50 active:opacity-80">
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel="Neuen Ort erstellen"
+      className="absolute bottom-52 right-5 z-50 active:opacity-80"
+    >
       <LinearGradient
         colors={[a.from, a.to]}
         start={{ x: 0, y: 0 }}

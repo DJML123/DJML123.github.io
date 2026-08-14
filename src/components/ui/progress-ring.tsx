@@ -58,7 +58,12 @@ export function ProgressRing({
   const dashoffset = circumference * (1 - shown);
 
   return (
-    <View style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}
+      accessibilityRole="progressbar"
+      accessibilityValue={{ min: 0, max: 100, now: Math.round(target * 100) }}
+      accessibilityLabel="Fortschritt"
+    >
       {/* -90° so the sweep starts at the top rather than at 3 o'clock. The
           rotation sits on a plain View rather than on <Svg> so the SVG element
           itself receives nothing but its own geometry props. */}

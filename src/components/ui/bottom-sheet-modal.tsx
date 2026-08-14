@@ -96,10 +96,15 @@ export function BottomSheetModal({
   if (!show) return null;
 
   return (
-    <Modal visible transparent animationType="none" onRequestClose={onClose}>
+    <Modal visible transparent animationType="none" onRequestClose={onClose} accessibilityViewIsModal>
       <View className="flex-1 justify-end">
         <Animated.View style={{ position: 'absolute', inset: 0, opacity: backdrop }}>
-          <Pressable onPress={onClose} className="flex-1 bg-black/60" />
+          <Pressable
+            onPress={onClose}
+            accessibilityRole="button"
+            accessibilityLabel="Panel schließen"
+            className="flex-1 bg-black/60"
+          />
         </Animated.View>
 
         <Animated.View style={{ transform: [{ translateY }], maxHeight: sheetMaxHeight }}>
@@ -127,6 +132,8 @@ export function BottomSheetModal({
                     <Pressable
                       onPress={onBack}
                       hitSlop={8}
+                      accessibilityRole="button"
+                      accessibilityLabel="Zurück"
                       className="h-8 w-8 items-center justify-center rounded-full bg-neutral-100 active:opacity-60 dark:bg-neutral-800"
                     >
                       <ChevronLeft size={18} color="#a1a1aa" />
@@ -137,6 +144,8 @@ export function BottomSheetModal({
                 <Pressable
                   onPress={onClose}
                   hitSlop={8}
+                  accessibilityRole="button"
+                  accessibilityLabel="Panel schließen"
                   className="h-8 w-8 items-center justify-center rounded-full bg-neutral-100 active:opacity-60 dark:bg-neutral-800"
                 >
                   <X size={16} color="#a1a1aa" />

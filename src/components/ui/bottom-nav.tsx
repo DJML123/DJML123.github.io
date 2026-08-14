@@ -113,7 +113,13 @@ function NavItem({
   const tint = active ? a.tone : isDark ? '#71717a' : '#9ca3af';
 
   return (
-    <Pressable onPress={onPress} className="flex-1 items-center gap-1 py-1 active:opacity-60">
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="tab"
+      accessibilityState={{ selected: active }}
+      accessibilityLabel={label}
+      className="flex-1 items-center gap-1 py-1 active:opacity-60"
+    >
       <View className="relative">
         <Icon size={21} color={tint} strokeWidth={active ? 2.4 : 2} />
         {badge != null && badge > 0 && (
@@ -148,6 +154,8 @@ function CreateButton({ isDark, onPress }: { isDark: boolean; onPress: () => voi
       onPress={onPress}
       onPressIn={() => animate(0.9)}
       onPressOut={() => animate(1)}
+      accessibilityRole="button"
+      accessibilityLabel="Neuen Ort erstellen"
       className="flex-1 items-center"
     >
       <Animated.View style={{ transform: [{ scale }], marginTop: -18 }}>

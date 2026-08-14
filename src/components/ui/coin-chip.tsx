@@ -23,7 +23,13 @@ export function CoinChip({ onPress }: { onPress: () => void }) {
   const isDark = colorScheme !== 'light';
 
   return (
-    <Pressable onPress={onPress} hitSlop={6} className="active:opacity-70">
+    <Pressable
+      onPress={onPress}
+      hitSlop={6}
+      accessibilityRole="button"
+      accessibilityLabel={`Coins-Shop öffnen, Guthaben ${balance}`}
+      className="active:opacity-70"
+    >
       {/* Opaque base under the tint: the chip floats over satellite imagery,
           which can be anything from white snow to near-black water, so it
           cannot borrow contrast from whatever is behind it. */}

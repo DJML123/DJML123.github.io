@@ -42,6 +42,11 @@ interface Step {
 /** Head-start share of the meter, before any step is done. */
 const BASELINE = 10;
 
+/** What the final step of the ladder counts; the capstone goal below starts
+ *  where the ladder ends. The bigger tip buttons (donate modal) go up to the
+ *  same number, so one single generous donation can finish it. */
+const ULTIMATE_GOAL_COINS = 5000;
+
 export function ProfileMenu({
   visible,
   onClose,
@@ -208,9 +213,33 @@ export function ProfileMenu({
                   </Text>
                 </>
               ) : (
-                <Text className="mt-1.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
-                  Profil komplett 🎉
-                </Text>
+                <View accessibilityLiveRegion="polite">
+                  <Text className="mt-1.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
+                    Profil komplett 🎉
+                  </Text>
+                  {/* The ladder ends at 100%, but the app's point does not:
+                      beyond it sits the ultimate goal - the full 5000 coins
+                      given away. Only visible once everything else is done,
+                      so it reads as the capstone, not as another chore. */}
+                  <View className="mt-2">
+                    <Text className="text-[10px] font-semibold text-neutral-900 dark:text-white">
+                      Ultimatives Ziel: {Math.min(totalDonatedCoins, ULTIMATE_GOAL_COINS)}/
+                      {ULTIMATE_GOAL_COINS} Coins gespendet
+                    </Text>
+                    <View className="mt-1 h-1.5 overflow-hidden rounded-full bg-neutral-300 dark:bg-neutral-600">
+                      <View
+                        className="h-full rounded-full"
+                        style={{
+                          width: `${Math.min(100, (totalDonatedCoins / ULTIMATE_GOAL_COINS) * 100)}%`,
+                          backgroundColor: a.tone,
+                        }}
+                      />
+                    </View>
+                    {totalDonatedCoins >= ULTIMATE_GOAL_COINS && (
+                      <Text className="mt-1 text-[10px] font-bold text-amber-500">Alles erreicht 👑</Text>
+                    )}
+                  </View>
+                </View>
               )}
             </View>
             <View className="flex-1 gap-2">

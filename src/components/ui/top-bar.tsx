@@ -105,6 +105,8 @@ export function TopBar({
             <CoinChip onPress={onOpenCoins} />
             <Pressable
               onPress={onPressProfile}
+              accessibilityRole="button"
+              accessibilityLabel="Profil öffnen"
               // Fully glow-free, in both modes: no ring, no shadow, no glow.
               // The gradient ring around the avatar is the only frame - any
               // boxShadow read as clutter over satellite and dark map alike.
@@ -160,12 +162,15 @@ export function TopBar({
             placeholder="Adresse, Ort oder Laden suchen"
             placeholderTextColor="#9ca3af"
             returnKeyType="search"
+            accessibilityLabel="Suche nach Adresse, Ort oder Laden"
             className="flex-1 text-sm text-neutral-900 dark:text-white"
           />
           {searchQuery.length > 0 && (
             <Pressable
               onPress={() => onChangeSearch('')}
               hitSlop={10}
+              accessibilityRole="button"
+              accessibilityLabel="Suche leeren"
               className="h-5 w-5 items-center justify-center rounded-full bg-black/10 active:opacity-60 dark:bg-white/15"
             >
               <X size={11} color="#71717a" strokeWidth={3} />
@@ -203,6 +208,9 @@ export function TopBar({
               <Pressable
                 key={cat.key}
                 onPress={() => onSelectCategory(cat.key)}
+                accessibilityRole="button"
+                accessibilityState={{ selected: active }}
+                accessibilityLabel={`Filter ${cat.label}`}
                 // Plain Pressable, not AnimatedPressable: the scale transform
                 // on the animated wrapper creates a new backdrop root, which
                 // makes Chrome drop the backdrop-filter of the glass layer

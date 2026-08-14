@@ -28,13 +28,20 @@ function RailButton({
   onPress,
   label,
   children,
+  accessibilityLabel,
 }: {
   onPress: () => void;
   label: string;
   children: React.ReactNode;
+  accessibilityLabel?: string;
 }) {
   return (
-    <Pressable onPress={onPress} className="items-center gap-1 active:opacity-60">
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel ?? label}
+      className="items-center gap-1 active:opacity-60"
+    >
       <View className="h-12 w-12 items-center justify-center">{children}</View>
       <Text
         className="text-[10px] font-bold text-white"
@@ -141,6 +148,7 @@ export function VideoFeedCard({ item }: { item: VideoFeedItem }) {
           // Baseline from the clip's own data plus your like, which is the
           // persisted part - it survives reloads and is never inflated.
           label={(item.likes + (liked ? 1 : 0)).toLocaleString('de-DE')}
+          accessibilityLabel={liked ? 'Gefällt mir nicht mehr' : 'Gefällt mir'}
         >
           <Heart
             size={28}

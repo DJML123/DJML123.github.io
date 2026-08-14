@@ -175,9 +175,15 @@ function BadgePin({ glyph, hex, live, size = 32 }: { glyph: string; hex: string;
 }
 
 export function SpotMarker({ spot, onPress }: { spot: Spot; onPress: () => void }) {
+  const label = spot.isLive ? `${spot.title} – live` : spot.title;
   if (spot.type === 'streamer') {
     return (
-      <Pressable onPress={onPress} className="items-center">
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={label}
+        className="items-center"
+      >
         {/* No ping ring: a map with several live streamers turned into a field
             of expanding circles. The red rim plus the static halo below already
             say "live" without anything moving. */}
@@ -207,7 +213,12 @@ export function SpotMarker({ spot, onPress }: { spot: Spot; onPress: () => void 
 
   if (spot.type === 'event') {
     return (
-      <Pressable onPress={onPress} className="items-center">
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={label}
+        className="items-center"
+      >
         <BadgePin glyph={spot.eventKind ?? 'meetup'} hex={KIND_HEX[spot.eventKind ?? ''] ?? PLACE_HEX} live={spot.isLive} />
       </Pressable>
     );
@@ -218,7 +229,12 @@ export function SpotMarker({ spot, onPress }: { spot: Spot; onPress: () => void 
   // pin - it used to be a plate icon, which labelled every park and skatepark
   // a restaurant.
   return (
-    <Pressable onPress={onPress} className="items-center">
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      className="items-center"
+    >
       <BadgePin glyph="place" hex={PLACE_HEX} />
     </Pressable>
   );
