@@ -1,21 +1,51 @@
-MIT License
-
+OnSpot – Alle Rechte vorbehalten
 Copyright (c) 2026 DJML123
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Diese Software ist urheberrechtlich geschützt und steht unter keiner
+Open-Source-Lizenz.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+ERLAUBT
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+  Die App unter https://djml123.github.io/ zu benutzen. Dafür braucht es
+  keine Erlaubnis – die Seite aufzurufen und zu verwenden ist für jeden
+  frei.
+
+  Den Quellcode anzusehen und daraus zu lernen.
+
+NICHT ERLAUBT, ohne vorherige schriftliche Zustimmung des Rechteinhabers
+
+  Den Quellcode oder Teile davon zu kopieren, zu verändern oder in eigene
+  Projekte zu übernehmen.
+
+  Die Software – verändert oder unverändert – weiterzugeben, zu
+  veröffentlichen oder zu betreiben.
+
+  Die Software oder Teile davon zu verkaufen oder anderweitig kommerziell
+  zu verwerten.
+
+Die Software wird ohne jede Gewähr bereitgestellt. Der Rechteinhaber haftet
+nicht für Schäden, die aus ihrer Nutzung entstehen.
+
+Anfragen für abweichende Nutzung: über GitHub an @DJML123.
+
+--------------------------------------------------------------------------
+
+OnSpot – All rights reserved
+Copyright (c) 2026 DJML123
+
+This software is proprietary. No open-source licence is granted.
+
+You MAY use the app at https://djml123.github.io/ and read the source code.
+
+You MAY NOT copy, modify, reuse, redistribute, publish, self-host or sell
+this software or any part of it without prior written permission from the
+copyright holder.
+
+Provided "as is", without warranty of any kind.
+
+--------------------------------------------------------------------------
+
+Hinweis zu Fremdcode: Dieses Projekt nutzt Bibliotheken von Dritten (siehe
+package.json) sowie Kartendaten von OpenStreetMap (ODbL), Kartenkacheln von
+OpenFreeMap und Esri, und Maki-Piktogramme (CC0). Für diese gelten jeweils
+die Lizenzen ihrer Urheber, nicht die obigen Bedingungen.

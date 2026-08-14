@@ -97,4 +97,13 @@ hierher.
 
 ## Lizenz
 
-MIT – siehe [LICENSE](LICENSE).
+**Alle Rechte vorbehalten.** Kein Open Source.
+
+Die App unter [djml123.github.io](https://djml123.github.io/) darf jeder
+benutzen, und der Quellcode darf gelesen werden. Kopieren, Verändern,
+Weiterverbreiten, Selbst-Hosten oder Verkaufen ist ohne schriftliche
+Zustimmung nicht gestattet – siehe [LICENSE](LICENSE).
+
+Für die verwendeten Bibliotheken, Kartendaten (OpenStreetMap, ODbL),
+Kartenkacheln (OpenFreeMap, Esri) und Piktogramme (Maki, CC0) gelten die
+Lizenzen ihrer jeweiligen Urheber.
