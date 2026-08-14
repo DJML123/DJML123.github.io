@@ -102,8 +102,17 @@ export async function purchasePack(packId: string): Promise<boolean> {
     const client = getSupabase();
     if (!client) return false;
     // Placeholder for the IAP flow: purchase -> receipt -> redeem-iap.
+    //
+    // `transactionId` identifies the *purchase*, which is what the server's
+    // ledger keys on. Sending only the pack id made every pack a one-time
+    // purchase per account: the second buy hit the ledger's primary key and
+    // was answered with "already claimed" and zero coins. Once expo-iap is
+    // wired in, this is the store's transaction id out of the verified
+    // receipt; until then it is a fresh local id per purchase, which keeps
+    // the seam honest without pretending to be a receipt.
+    const transactionId = `demo-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
     const { error } = await client.functions.invoke('redeem-iap', {
-      body: { packId },
+      body: { packId, transactionId },
     });
     if (error) return false;
     return true;

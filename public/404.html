@@ -1,0 +1,109 @@
+<!doctype html>
+<!--
+  GitHub Pages serves this file for any path it has no file for. Without it the
+  visitor got GitHub's own 404 - a white page with the Octocat, no sign that
+  they were ever on OnSpot.
+
+  Deliberately static and self-contained: it must render before, and without,
+  the 5 MB app bundle, which is the whole reason someone lands here (a typo, a
+  stale link, a route that no longer exists). Every real route of the app is
+  exported as its own HTML file, so this page only ever answers for paths the
+  app genuinely does not have.
+-->
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#8b5cf6" />
+    <meta name="robots" content="noindex" />
+    <title>Seite nicht gefunden – OnSpot</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #fafafa;
+        --muted: #a1a1aa;
+        --bg: #0b0a10;
+        --accent: #8b5cf6;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Sora, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        text-align: center;
+      }
+      /* The same two washes the app paints over its dark chrome, so the page
+         reads as part of OnSpot rather than as the server talking. */
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      body::before {
+        top: -70px;
+        right: -70px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0));
+      }
+      body::after {
+        bottom: -80px;
+        left: -80px;
+        background: radial-gradient(circle, rgba(192, 38, 211, 0.14), rgba(192, 38, 211, 0));
+      }
+      main { position: relative; max-width: 340px; }
+      .mark {
+        width: 54px;
+        height: 54px;
+        margin: 0 auto 20px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #8b5cf6, #c026d3);
+        box-shadow: 0 0 24px rgba(139, 92, 246, 0.45);
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1;
+      }
+      .code {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      h1 { margin: 10px 0 0; font-size: 24px; font-weight: 800; letter-spacing: -0.3px; }
+      p { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
+      a {
+        display: inline-block;
+        margin-top: 26px;
+        padding: 13px 26px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 10px 28px -8px rgba(139, 92, 246, 0.8);
+      }
+      a:active { opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="mark">O</div>
+      <div class="code">Fehler 404</div>
+      <h1>Diese Seite gibt es nicht</h1>
+      <p>Der Link führt ins Leere. Auf der Karte läuft aber gerade einiges.</p>
+      <a href="/">Zur Karte</a>
+    </main>
+  </body>
+</html>

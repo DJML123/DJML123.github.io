@@ -1,56 +1,93 @@
-# Welcome to your Expo app 👋
+# OnSpot
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Live-Streams, Events und Orte auf einer Karte – von deiner Straße bis Tokio.
 
-## Get started
+**Live: [djml123.github.io](https://djml123.github.io/)**
 
-1. Install dependencies
+Eine Expo-App (iOS, Android, Web) aus einer Codebasis. Die Karte ist eine
+MapLibre-Satellitenansicht mit eigenen POI-Symbolen; dazu kommen ein
+TikTok-artiger Video-Feed, Chats, Coins und ein Avatar-Editor.
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Schnellstart
 
 ```bash
-npm run reset-project
+npm install
+npm run web
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Die App läuft danach auf <http://localhost:8081> (bzw. dem Port, den Expo
+meldet). Für iOS/Android stattdessen `npm run ios` oder `npm run android`.
 
-### Other setup steps
+> **Standort auf dem Handy:** Browser geben GPS nur über HTTPS frei. Über
+> `http://192.168.x.x:8081` bleibt nur die grobe IP-Position. `npm run web:tunnel`
+> startet die App über eine HTTPS-Adresse, dann funktioniert der genaue Standort.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Skripte
 
-## Learn more
+| Befehl | Wofür |
+| --- | --- |
+| `npm run web` | Web-Entwicklung im Browser |
+| `npm run web:tunnel` | wie oben, aber über HTTPS (nötig für GPS auf dem Handy) |
+| `npm run ios` / `npm run android` | Entwicklung auf Simulator/Gerät |
+| `npm test` | Jest-Tests (Coins, Repository, Spenden) |
+| `npm run lint` | ESLint über das gesamte Projekt |
+| `npx tsc --noEmit` | Typprüfung |
 
-To learn more about developing your project with Expo, look at the following resources:
+## Aufbau
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
+src/
+  app/            Bildschirme (expo-router: index, onboarding, +html)
+  components/
+    map/          MapLibre-Karte, POI-Ebene, Marker, Detail-Sheet
+    feed/         Video-Feed
+    ui/           Sheets, Modals und gemeinsame Bausteine
+  constants/      React-Contexts (Auth, Coins, Prefs, Social, …)
+  services/       Repository, Supabase-Anbindung, Zahlungen, Sync
+supabase/         SQL-Schema und Edge Functions
+public/           Dateien, die unverändert ins Web-Bundle kopiert werden
+```
 
-## Join the community
+Die Karte zeichnet ihre POIs selbst (`src/components/map/poi-layer.ts`): rund
+hundert OpenMapTiles-Klassen werden auf fünfzehn Kategorien abgebildet, und
+Kategorie bestimmt Symbol, Farbe und ab welchem Zoom ein Ort erscheint. Läden
+und Gastronomie kommen zuerst, alles Übrige erst weiter hineingezoomt, Haltestellen
+zuletzt.
 
-Join our community of developers creating universal apps.
+## Backend (optional)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Ohne Konfiguration läuft alles lokal: der Zustand liegt in AsyncStorage bzw.
+localStorage, es geht nichts an einen Server.
+
+Für echte Synchronisierung:
+
+1. Projekt auf <https://supabase.com/dashboard> anlegen
+2. `supabase/schema.sql` im SQL-Editor ausführen
+3. `.env.example` nach `.env` kopieren und Projekt-URL sowie **anon public**
+   Key eintragen (niemals den `service_role` Key)
+4. Edge Functions bereitstellen:
+   ```bash
+   supabase functions deploy grant-coins redeem-iap
+   ```
+
+Coins werden ausschließlich serverseitig gutgeschrieben – die Beträge stehen in
+den Edge Functions, nicht im Client, und `grant_log` verhindert doppelte
+Gutschriften.
+
+> **Zahlungen sind Demo.** Abo und Spenden zeigen den Ablauf, es ist kein
+> Zahlungsanbieter angebunden und es wird nichts abgebucht.
+
+## Deployment
+
+Jeder Push auf `main` baut über `.github/workflows/deploy.yml` mit
+`npx expo export --platform web` und veröffentlicht `dist/` auf GitHub Pages.
+
+Die Supabase-Variablen sind im Build bewusst nicht gesetzt, die
+veröffentlichte Seite läuft also rein lokal. Sollen sie mit: als Repository-Secrets
+hinterlegen und im Workflow-Schritt als `env` durchreichen. `EXPO_PUBLIC_*`
+landet dabei im ausgelieferten Bundle – beim anon Key ist das vorgesehen, RLS
+schützt die Daten.
+
+## Lizenz
+
+MIT – siehe [LICENSE](LICENSE).

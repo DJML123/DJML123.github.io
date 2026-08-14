@@ -60,10 +60,19 @@ create policy "grant_log_own"
 
 -- Atomic, additive wallet credit. Wraps ledger + increment in one
 -- transaction so a crash can never leave a credit without a log entry.
--- Returns the new balance; 0 rows updated means "already claimed" (balance
--- is returned as-is).
-create or replace function public.claim_grant(p_user uuid, p_reason text, p_coins bigint)
-returns bigint
+--
+-- Returns the new balance *and* whether this call was the one that credited
+-- it. The caller cannot infer that from the balance alone, and the edge
+-- functions used to answer the question with a SELECT before calling this -
+-- an extra round trip plus a window where two parallel requests both read
+-- "not claimed yet". Reporting it from inside the transaction removes both.
+--
+-- Postgres refuses to change a function's return type in place, so the old
+-- `returns bigint` version is dropped rather than replaced.
+drop function if exists public.claim_grant(uuid, text, bigint);
+
+create function public.claim_grant(p_user uuid, p_reason text, p_coins bigint)
+returns table (balance bigint, granted boolean)
 language plpgsql
 security definer
 set search_path = public
@@ -75,18 +84,21 @@ begin
   values (p_user, p_reason, p_coins)
   on conflict (user_id, reason) do nothing;
 
+  -- FOUND is false when the insert hit the conflict, i.e. this user has
+  -- already been credited for this exact reason.
   if not found then
-    select balance into v_balance from public.wallets where user_id = p_user;
-    return coalesce(v_balance, 0);
+    select w.balance into v_balance from public.wallets w where w.user_id = p_user;
+    return query select coalesce(v_balance, 0), false;
+    return;
   end if;
 
   insert into public.wallets (user_id, balance)
   values (p_user, p_coins)
   on conflict (user_id)
   do update set balance = public.wallets.balance + excluded.balance, updated_at = now()
-  returning balance into v_balance;
+  returning wallets.balance into v_balance;
 
-  return v_balance;
+  return query select v_balance, true;
 end;
 $$;
 

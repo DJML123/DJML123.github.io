@@ -404,7 +404,13 @@ export const OnSpotMap = forwardRef<
         const zoom = await map.getZoom();
         const features = await map.queryRenderedFeatures(pixel, { layers: poiLayerIdsRef.current });
         const feature = features.find(
-          (f) => f.properties && isPoiVisibleAtZoom(zoom, f.properties as { class?: string; subclass?: string; rank?: number })
+          (f) =>
+            f.properties &&
+            isPoiVisibleAtZoom(
+              zoom,
+              f.properties as { class?: string; subclass?: string; rank?: number },
+              CATEGORY_MATCH[category] !== undefined
+            )
         );
         if (!feature || !feature.properties) return;
         const props = feature.properties as Record<string, unknown>;

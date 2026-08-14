@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 import type { ViewTab } from '@/constants/mock-data';
 import type { AccentKey } from '@/constants/accent';
 import type {
@@ -120,6 +121,16 @@ const donationId = () => `don-${Date.now()}-${donationSeq++}`;
 const activityId = () => `act-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
 /**
+ * False during the static web export, where Expo renders every route once in
+ * Node to produce the HTML. There is no `window` and therefore no
+ * localStorage, so AsyncStorage's web driver throws - and because the write is
+ * on a 300ms timer, it lands *after* the render finishes and surfaces as a
+ * bare "window is not defined" at the end of an otherwise successful build.
+ * Nothing to persist there anyway: that pass has no user.
+ */
+const canPersist = () => Platform.OS !== 'web' || typeof window !== 'undefined';
+
+/**
  * Single source of truth for everything that must survive a reload: donations,
  * following, chats, saved spots, prefs, progress, reports, analytics.
  *
@@ -171,6 +182,7 @@ class LocalRepository {
     this.lastSavedAt = Date.now();
     if (this.saveTimer) clearTimeout(this.saveTimer);
     this.saveTimer = setTimeout(() => {
+      if (!canPersist()) return;
       AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(this.state)).catch((err) =>
         console.warn('[onspot] State konnte nicht gespeichert werden:', err)
       );
@@ -204,6 +216,7 @@ class LocalRepository {
     this.state = { ...defaultState(), ...incoming };
     this.lastSavedAt = Date.now();
     this.listeners.forEach((l) => l());
+    if (!canPersist()) return true;
     void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(this.state)).catch((err) =>
       console.warn('[onspot] State konnte nicht gespeichert werden:', err)
     );
