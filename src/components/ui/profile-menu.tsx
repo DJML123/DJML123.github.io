@@ -322,6 +322,8 @@ function MenuRow({
   return (
     <Pressable
       onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
       className={`flex-row items-center gap-3 rounded-2xl px-4 py-3.5 active:bg-neutral-100 dark:active:bg-neutral-800${
         highlight ? '' : ''
       }`}

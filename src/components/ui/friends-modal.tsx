@@ -165,6 +165,8 @@ export function FriendsModal({
               </Text>
               <Pressable
                 onPress={() => setTab('friends')}
+                accessibilityRole="button"
+                accessibilityLabel="Leute finden"
                 className="mt-4 rounded-full px-4 py-2 active:opacity-80"
                 style={{ backgroundColor: a.tone, boxShadow: `0 8px 20px -6px ${a.glow}` }}
               >
@@ -178,6 +180,8 @@ export function FriendsModal({
                 <Pressable
                   key={t.name}
                   onPress={() => setChatWith(t.name)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Chat mit ${t.name}, ${t.last.from === 'me' ? 'du: ' : ''}${t.last.text}`}
                   className="mb-2 flex-row items-center gap-3 rounded-2xl bg-neutral-100 p-3 active:opacity-70 dark:bg-neutral-800"
                 >
                   <Avatar url={creator?.avatarUrl ?? ''} live={creator?.isLive} />
@@ -240,6 +244,8 @@ export function FriendsModal({
                 <Pressable
                   onPress={() => setChatWith(c.name)}
                   hitSlop={6}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Chat mit ${c.name}`}
                   className="h-10 w-10 items-center justify-center rounded-2xl active:opacity-70"
                   style={{ backgroundColor: `${a.tone}26` }}
                 >
@@ -247,6 +253,8 @@ export function FriendsModal({
                 </Pressable>
                 <Pressable
                   onPress={() => toggleFollow(c.name)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${c.name} entfolgen`}
                   className="rounded-full border border-black/10 px-3 py-1.5 active:opacity-70 dark:border-white/20"
                 >
                   <Text className="text-[11px] font-semibold text-neutral-600 dark:text-neutral-300">
@@ -276,6 +284,8 @@ export function FriendsModal({
                 </View>
                 <Pressable
                   onPress={() => toggleFollow(c.name)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${c.name} folgen`}
                   className="flex-row items-center gap-1.5 rounded-full px-3.5 py-2 active:opacity-80"
                   style={{ backgroundColor: a.tone, boxShadow: `0 8px 20px -6px ${a.glow}` }}
                 >

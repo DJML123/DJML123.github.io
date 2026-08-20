@@ -56,6 +56,12 @@ export function SelectCard({
       onPress={onPress}
       onPressIn={() => animate(0.96)}
       onPressOut={() => animate(1)}
+      // A checkbox, not a button: every screen this card appears on is a
+      // multi-select (genres, goals, alert types), so "checked/unchecked"
+      // is the state a screen reader actually needs to announce.
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: selected }}
+      accessibilityLabel={sublabel ? `${label}, ${sublabel}` : label}
       className={className}
     >
       <Animated.View style={{ transform: [{ scale }] }}>

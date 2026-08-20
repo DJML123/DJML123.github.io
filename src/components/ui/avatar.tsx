@@ -161,6 +161,7 @@ export function Avatar({
       contentFit="cover"
       transition={150}
       cachePolicy="memory-disk"
+      accessibilityLabel={name ? `Profilbild von ${name}` : 'Profilbild'}
     />
   ) : (
     <View

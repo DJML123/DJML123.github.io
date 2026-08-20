@@ -45,7 +45,7 @@ function ToggleRow({
           <Text className="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">{subtitle}</Text>
         </View>
       </View>
-      <AnimatedSwitch value={value} onValueChange={onValueChange} />
+      <AnimatedSwitch value={value} onValueChange={onValueChange} accessibilityLabel={title} />
     </View>
   );
 }
@@ -67,7 +67,7 @@ function SubToggle({
         <Icon size={13} color="#71717a" />
         <Text className="text-xs font-medium text-neutral-600 dark:text-neutral-300">{label}</Text>
       </View>
-      <AnimatedSwitch value={value} onValueChange={onValueChange} />
+      <AnimatedSwitch value={value} onValueChange={onValueChange} accessibilityLabel={label} />
     </View>
   );
 }

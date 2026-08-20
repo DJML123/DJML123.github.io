@@ -169,7 +169,7 @@ export default function OnSpotScreen() {
   };
 
   return (
-    <View className="flex-1 overflow-hidden bg-neutral-100 dark:bg-neutral-950">
+    <View role="main" className="flex-1 overflow-hidden bg-neutral-100 dark:bg-neutral-950">
       <FadeIn id={activeTab}>
         {/*
           The map stays mounted across tab switches - unmounting it tears down

@@ -58,6 +58,7 @@ export function BottomNav({
 
   return (
     <View
+      accessibilityRole="tablist"
       className="absolute bottom-0 left-0 right-0 z-40 flex-row items-end justify-around px-2 pb-7 pt-2"
       style={{
         backgroundColor: isDark ? 'rgba(10,10,14,0.92)' : 'rgba(255,255,255,0.94)',

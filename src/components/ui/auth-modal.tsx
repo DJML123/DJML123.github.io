@@ -184,7 +184,12 @@ export function AuthModal({
                 </Text>
               )}
 
-              <Pressable onPress={handleClose} className="mt-3 items-center py-2">
+              <Pressable
+                onPress={handleClose}
+                accessibilityRole="button"
+                accessibilityLabel="Später"
+                className="mt-3 items-center py-2"
+              >
                 <Text className="text-sm text-neutral-500 dark:text-neutral-400">Später</Text>
               </Pressable>
             </View>
@@ -193,6 +198,9 @@ export function AuthModal({
               <View className="mb-5 flex-row rounded-full bg-neutral-100 p-1.5 dark:bg-neutral-800">
                 <Pressable
                   onPress={() => setMode('login')}
+                  accessibilityRole="tab"
+                  accessibilityState={{ selected: mode === 'login' }}
+                  accessibilityLabel="Login"
                   className={mode === 'login' ? 'relative flex-1 overflow-hidden rounded-full py-2.5' : 'flex-1 py-2.5'}
                   style={mode === 'login' ? { boxShadow: `0 4px 10px -2px ${a.glow}` } : undefined}
                 >
@@ -216,6 +224,9 @@ export function AuthModal({
                 </Pressable>
                 <Pressable
                   onPress={() => setMode('register')}
+                  accessibilityRole="tab"
+                  accessibilityState={{ selected: mode === 'register' }}
+                  accessibilityLabel="Registrieren"
                   className={mode === 'register' ? 'relative flex-1 overflow-hidden rounded-full py-2.5' : 'flex-1 py-2.5'}
                   style={mode === 'register' ? { boxShadow: `0 4px 10px -2px ${a.glow}` } : undefined}
                 >
@@ -291,6 +302,8 @@ export function AuthModal({
                   />
                   <Pressable
                     onPress={pickPhoto}
+                    accessibilityRole="button"
+                    accessibilityLabel={avatarPhoto ? 'Foto ersetzen' : 'Foto hochladen'}
                     className="mb-4 flex-row items-center justify-center gap-2 rounded-2xl border border-dashed py-3"
                     style={{ borderColor: a.tone }}
                   >
@@ -299,7 +312,12 @@ export function AuthModal({
                       {avatarPhoto ? 'Foto ersetzen' : 'Foto hochladen'}
                     </Text>
                     {avatarPhoto && (
-                      <Pressable onPress={() => setAvatarPhoto(null)} hitSlop={8}>
+                      <Pressable
+                        onPress={() => setAvatarPhoto(null)}
+                        hitSlop={8}
+                        accessibilityRole="button"
+                        accessibilityLabel="Foto entfernen"
+                      >
                         <Trash2 size={14} color="#71717a" />
                       </Pressable>
                     )}
@@ -312,6 +330,9 @@ export function AuthModal({
                       <Pressable
                         key={c}
                         onPress={() => setAvatarColor(c)}
+                        accessibilityRole="radio"
+                        accessibilityState={{ checked: avatarColor === c }}
+                        accessibilityLabel={`Farbe ${c}`}
                         className={
                           avatarColor === c
                             ? 'h-10 w-10 rounded-full border-[3px] border-neutral-900 dark:border-white'
@@ -330,7 +351,14 @@ export function AuthModal({
                       off-grid. Four per row is two even rows. */}
                   <View className="mb-5 flex-row flex-wrap gap-y-2">
                     {AVATAR_EMOJIS.map((e) => (
-                      <Pressable key={e} onPress={() => setAvatarEmoji(e)} className="w-1/4 items-center">
+                      <Pressable
+                        key={e}
+                        onPress={() => setAvatarEmoji(e)}
+                        accessibilityRole="radio"
+                        accessibilityState={{ checked: avatarEmoji === e }}
+                        accessibilityLabel={`Emoji ${e}`}
+                        className="w-1/4 items-center"
+                      >
                         <View
                           className={
                             avatarEmoji === e
@@ -354,7 +382,12 @@ export function AuthModal({
                     disabled={!name.trim()}
                     className="mb-3"
                   />
-                  <Pressable onPress={handleClose} className="items-center py-2">
+                  <Pressable
+                    onPress={handleClose}
+                    accessibilityRole="button"
+                    accessibilityLabel="Abbrechen"
+                    className="items-center py-2"
+                  >
                     <Text className="text-sm text-neutral-500 dark:text-neutral-400">Abbrechen</Text>
                   </Pressable>
                 </>
@@ -387,11 +420,21 @@ export function AuthModal({
                     className="mb-3"
                   />
                   {mode === 'register' ? (
-                    <Pressable onPress={() => setStep(0)} className="items-center py-2">
+                    <Pressable
+                      onPress={() => setStep(0)}
+                      accessibilityRole="button"
+                      accessibilityLabel="Zurück"
+                      className="items-center py-2"
+                    >
                       <Text className="text-sm text-neutral-500 dark:text-neutral-400">Zurück</Text>
                     </Pressable>
                   ) : (
-                    <Pressable onPress={handleClose} className="items-center py-2">
+                    <Pressable
+                      onPress={handleClose}
+                      accessibilityRole="button"
+                      accessibilityLabel="Abbrechen"
+                      className="items-center py-2"
+                    >
                       <Text className="text-sm text-neutral-500 dark:text-neutral-400">Abbrechen</Text>
                     </Pressable>
                   )}

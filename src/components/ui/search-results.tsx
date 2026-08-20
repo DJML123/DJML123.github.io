@@ -33,6 +33,8 @@ function Row({
   return (
     <Pressable
       onPress={() => onSelect(result)}
+      accessibilityRole="button"
+      accessibilityLabel={`${result.title}, ${result.subtitle}`}
       className={
         last
           ? 'flex-row items-center gap-3 px-3.5 py-3 active:opacity-60'
@@ -102,7 +104,13 @@ export function SearchResults({
           <Text className="text-[11px] font-bold uppercase tracking-[1.2px] text-neutral-400 dark:text-neutral-500">
             Zuletzt gesucht
           </Text>
-          <Pressable onPress={onClearRecents} hitSlop={8} className="active:opacity-60">
+          <Pressable
+            onPress={onClearRecents}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="Suchverlauf löschen"
+            className="active:opacity-60"
+          >
             <Text className="text-[11px] font-semibold text-neutral-400 dark:text-neutral-500">Löschen</Text>
           </Pressable>
         </View>

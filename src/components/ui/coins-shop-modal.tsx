@@ -72,6 +72,8 @@ export function CoinsShopModal({
             <Pressable
               onPress={() => void buyPack(pack.id)}
               disabled={processing}
+              accessibilityRole="button"
+              accessibilityLabel={`${pack.name} kaufen, ${formatEuro(pack.priceCents)}`}
               className="rounded-full px-4 py-2.5 active:opacity-70"
               style={{ backgroundColor: a.tone, boxShadow: `0 4px 10px -2px ${a.glow}` }}
             >
@@ -90,6 +92,8 @@ export function CoinsShopModal({
         </View>
         <Pressable
           onPress={shareCode}
+          accessibilityRole="button"
+          accessibilityLabel="Einladungscode teilen"
           className="h-11 w-11 items-center justify-center rounded-2xl"
           style={{ backgroundColor: `${a.tone}1a` }}
         >

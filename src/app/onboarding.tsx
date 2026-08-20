@@ -163,7 +163,12 @@ export default function OnboardingScreen() {
       <View className="border-t border-white/5 px-6 pb-10 pt-4">
         <PrimaryButton label={ctaLabel} onPress={advance} disabled={!canAdvance} />
         {!isDone && (
-          <Pressable onPress={finish} className="mt-3 items-center py-2">
+          <Pressable
+            onPress={finish}
+            accessibilityRole="button"
+            accessibilityLabel="Einrichtung überspringen"
+            className="mt-3 items-center py-2"
+          >
             <Text className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
               Überspringen
             </Text>
@@ -345,6 +350,9 @@ function CreatorStep({
                   haptics.tap();
                   onToggle(c.name);
                 }}
+                accessibilityRole="button"
+                accessibilityLabel={following ? `${c.name} entfolgen` : `${c.name} folgen`}
+                accessibilityState={{ selected: following }}
                 className="active:opacity-70"
               >
                 {following ? (

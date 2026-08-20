@@ -89,6 +89,9 @@ export function CreateSpotModal({
             <Pressable
               key={t.key}
               onPress={() => pickType(t.key)}
+              accessibilityRole="radio"
+              accessibilityState={{ checked: active }}
+              accessibilityLabel={`${t.label}, ${t.hint}`}
               className="flex-1 items-center rounded-2xl px-2 py-4 active:opacity-80"
               style={
                 active

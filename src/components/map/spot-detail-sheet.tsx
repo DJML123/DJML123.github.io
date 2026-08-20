@@ -237,7 +237,11 @@ export function SpotDetailSheet({
                 style={{ borderWidth: 2, borderColor: ringColor }}
               >
                 {current.avatarUrl ? (
-                  <SmartImage source={{ uri: current.avatarUrl }} className="h-full w-full rounded-full" />
+                  <SmartImage
+                    source={{ uri: current.avatarUrl }}
+                    accessibilityLabel={`Bild von ${current.title}`}
+                    className="h-full w-full rounded-full"
+                  />
                 ) : (
                   <MapPin size={20} color="#a1a1aa" />
                 )}
@@ -253,6 +257,8 @@ export function SpotDetailSheet({
             <Pressable
               onPress={() => setReportVisible(true)}
               hitSlop={10}
+              accessibilityRole="button"
+              accessibilityLabel="Melden"
               className="h-8 w-8 items-center justify-center rounded-full bg-neutral-100 active:opacity-60 dark:bg-neutral-800"
             >
               <TriangleAlert size={14} color="#71717a" />
@@ -260,6 +266,8 @@ export function SpotDetailSheet({
             <Pressable
               onPress={dismiss}
               hitSlop={10}
+              accessibilityRole="button"
+              accessibilityLabel="Schließen"
               className="h-8 w-8 items-center justify-center rounded-full bg-neutral-100 active:opacity-60 dark:bg-neutral-800"
             >
               <X size={14} color="#71717a" />
@@ -310,6 +318,8 @@ export function SpotDetailSheet({
             {phone && (
               <Pressable
                 onPress={() => openUrl(`tel:${phone.replace(/[^\d+]/g, '')}`)}
+                accessibilityRole="link"
+                accessibilityLabel={`Anrufen: ${phone}`}
                 className="flex-row items-center gap-2"
               >
                 <Phone size={14} color="#737373" />
@@ -317,7 +327,12 @@ export function SpotDetailSheet({
               </Pressable>
             )}
             {website && (
-              <Pressable onPress={() => openUrl(website)} className="flex-row items-center gap-2">
+              <Pressable
+                onPress={() => openUrl(website)}
+                accessibilityRole="link"
+                accessibilityLabel={`Website öffnen: ${website}`}
+                className="flex-row items-center gap-2"
+              >
                 <Globe size={14} color="#737373" />
                 <Text className="flex-1 text-xs" numberOfLines={1} style={{ color: a.tone }}>
                   {website}
@@ -333,6 +348,8 @@ export function SpotDetailSheet({
         {!route && !routing && (current.type === 'streamer' || current.type === 'event') && (
           <Pressable
             onPress={() => setDonateVisible(true)}
+            accessibilityRole="button"
+            accessibilityLabel={current.type === 'streamer' ? 'Streamer unterstützen' : 'Veranstaltung unterstützen'}
             className="mt-4 flex-row items-center justify-center gap-2 rounded-full py-3 active:opacity-80"
             style={{ backgroundColor: 'rgba(245,158,11,0.14)' }}
           >
@@ -348,6 +365,8 @@ export function SpotDetailSheet({
             <Pressable
               onPress={() => onSelectMode?.('car')}
               disabled={!onSelectMode}
+              accessibilityRole="button"
+              accessibilityLabel="Route anzeigen"
               className="flex-1 flex-row items-center justify-center gap-1.5 rounded-full bg-neutral-100 py-2.5 dark:bg-neutral-800"
             >
               <Car size={14} color="#52525b" />
@@ -356,6 +375,9 @@ export function SpotDetailSheet({
             <Pressable
               onPress={current.isLive ? () => onWatch?.(current) : () => onToggleSave?.(current.id)}
               disabled={!current.isLive && !onToggleSave}
+              accessibilityRole="button"
+              accessibilityLabel={current.isLive ? 'Live ansehen' : saved ? 'Gespeichert' : 'Merken'}
+              accessibilityState={{ selected: !current.isLive && saved }}
               className="relative flex-1 items-center overflow-hidden rounded-full py-2.5"
               style={{ boxShadow: `0 10px 15px -3px ${a.glow}` }}
             >
@@ -384,6 +406,9 @@ export function SpotDetailSheet({
                   <Pressable
                     key={key}
                     onPress={() => onSelectMode?.(key)}
+                    accessibilityRole="radio"
+                    accessibilityState={{ checked: active }}
+                    accessibilityLabel={label}
                     className={
                       active
                         ? 'flex-1 flex-row items-center justify-center gap-1 rounded-full py-2'
@@ -428,6 +453,8 @@ export function SpotDetailSheet({
             <Pressable
               onPress={onNavigate}
               disabled={!onNavigate}
+              accessibilityRole="button"
+              accessibilityLabel="Navigation starten"
               className="relative mt-3 items-center overflow-hidden rounded-full py-2.5"
               style={{ boxShadow: `0 10px 15px -3px ${a.glow}` }}
             >

@@ -59,7 +59,14 @@ export function AnimatedSegmented<T extends string>({
         const active = opt.key === value;
         const OptionIcon = opt.icon;
         return (
-          <Pressable key={opt.key} onPress={() => onChange(opt.key)} className="flex-1 flex-row items-center justify-center gap-1 px-3 py-1.5">
+          <Pressable
+            key={opt.key}
+            onPress={() => onChange(opt.key)}
+            accessibilityRole="tab"
+            accessibilityState={{ selected: active }}
+            accessibilityLabel={opt.label}
+            className="flex-1 flex-row items-center justify-center gap-1 px-3 py-1.5"
+          >
             {OptionIcon && <OptionIcon size={12} color={active ? '#171717' : '#737373'} />}
             <Text
               className={

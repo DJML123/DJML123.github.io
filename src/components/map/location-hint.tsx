@@ -86,7 +86,13 @@ export function LocationHint({
           <Text className="text-[13px] font-bold text-neutral-900 dark:text-white">{title}</Text>
           <Text className="mt-1 text-[11px] leading-4 text-neutral-500 dark:text-neutral-400">{body}</Text>
         </View>
-        <Pressable onPress={onDismiss} hitSlop={10} className="active:opacity-50">
+        <Pressable
+          onPress={onDismiss}
+          hitSlop={10}
+          accessibilityRole="button"
+          accessibilityLabel="Hinweis schließen"
+          className="active:opacity-50"
+        >
           <X size={15} color="#a1a1aa" />
         </Pressable>
       </View>
@@ -95,6 +101,8 @@ export function LocationHint({
         <Pressable
           onPress={onRetry}
           disabled={busy}
+          accessibilityRole="button"
+          accessibilityLabel={action}
           className="mt-3 flex-row items-center justify-center gap-2 rounded-full py-2.5 active:opacity-80"
           style={{ backgroundColor: a.tone, boxShadow: `0 8px 20px -6px ${a.glow}` }}
         >

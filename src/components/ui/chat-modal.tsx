@@ -79,11 +79,17 @@ function ChatThread({
   return (
     <View className="flex-1 bg-white dark:bg-neutral-950">
       <View className="flex-row items-center gap-3 border-b border-black/5 px-4 pb-3 pt-14 dark:border-white/10">
-        <Pressable onPress={onClose} className="h-9 w-9 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800">
+        <Pressable
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel="Zurück"
+          className="h-9 w-9 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800"
+        >
           <ChevronLeft size={20} color="#52525b" />
         </Pressable>
         <Image
           source={{ uri: avatar(name) }}
+          accessibilityLabel={`Profilbild von ${name}`}
           className="h-9 w-9 rounded-full"
           contentFit="cover"
           transition={150}
@@ -99,6 +105,9 @@ function ChatThread({
             someone. */}
         <Pressable
           onPress={() => toggleFollow(name)}
+          accessibilityRole="button"
+          accessibilityLabel={isFollowing(name) ? `${name} entfolgen` : `${name} folgen`}
+          accessibilityState={{ selected: isFollowing(name) }}
           className="rounded-full px-3 py-1.5 active:opacity-70"
           style={
             isFollowing(name)
@@ -146,6 +155,8 @@ function ChatThread({
               )}
               <Pressable
                 onPress={() => holdMessage(name, item.id)}
+                accessibilityRole="button"
+                accessibilityLabel={item.held ? 'Nachricht lösen' : 'Nachricht halten, damit sie nicht abläuft'}
                 className="flex-row items-center gap-1 rounded-full bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800"
                 hitSlop={6}
               >
@@ -174,6 +185,8 @@ function ChatThread({
           </View>
           <Pressable
             onPress={onRequestAuth}
+            accessibilityRole="button"
+            accessibilityLabel="Konto erstellen und antworten"
             className="relative mt-3 items-center overflow-hidden rounded-full py-3"
             style={{ boxShadow: `0 10px 15px -3px ${a.glow}` }}
           >
@@ -197,7 +210,13 @@ function ChatThread({
               placeholderTextColor="#9ca3af"
               className="flex-1 rounded-full bg-neutral-100 px-4 py-2.5 text-sm text-neutral-900 dark:bg-neutral-800 dark:text-white"
             />
-            <Pressable onPress={send} className="relative h-10 w-10 items-center justify-center overflow-hidden rounded-full" style={{ boxShadow: `0 10px 15px -3px ${a.glow}` }}>
+            <Pressable
+              onPress={send}
+              accessibilityRole="button"
+              accessibilityLabel="Senden"
+              className="relative h-10 w-10 items-center justify-center overflow-hidden rounded-full"
+              style={{ boxShadow: `0 10px 15px -3px ${a.glow}` }}
+            >
               <LinearGradient
                 colors={[a.from, a.to]}
                 start={{ x: 0, y: 0 }}

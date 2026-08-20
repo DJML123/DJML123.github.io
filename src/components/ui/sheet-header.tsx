@@ -27,19 +27,25 @@ export function SheetHeader({
           <Pressable
             onPress={onBack}
             hitSlop={6}
+            accessibilityRole="button"
+            accessibilityLabel="Zurück"
             className="h-8 w-8 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800"
           >
             <ArrowLeft size={16} color="#71717a" />
           </Pressable>
         )}
         <View>
-          <Text className="text-lg font-bold text-neutral-900 dark:text-white">{title}</Text>
+          <Text accessibilityRole="header" className="text-lg font-bold text-neutral-900 dark:text-white">
+            {title}
+          </Text>
           {subtitle && <Text className="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">{subtitle}</Text>}
         </View>
       </View>
       <Pressable
         onPress={onClose}
         hitSlop={6}
+        accessibilityRole="button"
+        accessibilityLabel="Schließen"
         className="h-8 w-8 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800"
       >
         <X size={14} color="#71717a" />

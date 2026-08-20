@@ -39,6 +39,9 @@ export function PrimaryButton({
       disabled={disabled}
       onPressIn={() => animate(0.95)}
       onPressOut={() => animate(1)}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityState={{ disabled: !!disabled }}
       className={className}
     >
       <Animated.View style={{ transform: [{ scale }], width: '100%' }}>

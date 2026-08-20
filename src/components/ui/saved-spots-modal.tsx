@@ -31,6 +31,8 @@ export function SavedSpotsModal({
                   onClose();
                   onSelectSpot(spot);
                 }}
+                accessibilityRole="button"
+                accessibilityLabel={`${spot.title}, ${spot.subtitle}`}
                 className="mb-2 flex-row items-center gap-3 rounded-2xl bg-neutral-100 p-2.5 dark:bg-neutral-800"
               >
                 <MapPin size={18} color="#a1a1aa" />

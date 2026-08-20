@@ -88,9 +88,16 @@ export function VideoFeedCard({ item }: { item: VideoFeedItem }) {
 
   return (
     <View style={{ height }} className="w-full items-center justify-center bg-black">
-      <Pressable onPress={handleTap} className="absolute inset-0">
+      <Pressable
+        onPress={handleTap}
+        accessibilityRole="button"
+        accessibilityLabel={`${item.title}, von ${item.authorName}. Doppelt antippen zum Liken.`}
+        className="absolute inset-0"
+      >
         <Image
           source={{ uri: item.videoThumbnail }}
+          accessibilityElementsHidden
+          importantForAccessibility="no"
           className="h-full w-full opacity-80"
           contentFit="cover"
           transition={200}
@@ -176,7 +183,11 @@ export function VideoFeedCard({ item }: { item: VideoFeedItem }) {
       {/* pb clears the bottom navigation bar (~86px). */}
       <View className="absolute bottom-28 left-4 right-20 z-50">
         <View className="mb-3 flex-row items-center gap-2">
-          <SmartImage source={{ uri: item.authorAvatar }} className="h-9 w-9 rounded-full border border-white/40" />
+          <SmartImage
+            source={{ uri: item.authorAvatar }}
+            accessibilityLabel={`Profilbild von ${item.authorName}`}
+            className="h-9 w-9 rounded-full border border-white/40"
+          />
           <Text className="font-bold text-white">{item.authorName}</Text>
           <Pop trigger={following}>
             <Pressable
@@ -184,6 +195,9 @@ export function VideoFeedCard({ item }: { item: VideoFeedItem }) {
                 toggleFollow(item.authorName);
                 haptics.light();
               }}
+              accessibilityRole="button"
+              accessibilityLabel={following ? `${item.authorName} entfolgen` : `${item.authorName} folgen`}
+              accessibilityState={{ selected: following }}
               className={
                 following
                   ? 'ml-1 rounded-full border border-white/40 bg-white/10 px-3 py-1'
@@ -214,10 +228,15 @@ export function VideoFeedCard({ item }: { item: VideoFeedItem }) {
 
         <View className="flex-row items-center justify-between">
           <View className="flex-row items-center">
+            {/* Decorative stack of avatars - the actual information ("128 dabei")
+                is the CountUp text right after it, so a screen reader does not
+                need to hear "profile picture" repeated per face. */}
             {item.attendeeAvatars.map((uri, i) => (
               <SmartImage
                 key={uri + i}
                 source={{ uri }}
+                accessibilityElementsHidden
+                importantForAccessibility="no"
                 className="h-8 w-8 rounded-full border-2 border-black"
                 style={{ marginLeft: i === 0 ? 0 : -10 }}
               />
@@ -232,6 +251,9 @@ export function VideoFeedCard({ item }: { item: VideoFeedItem }) {
           <Pop trigger={joined}>
             <Pressable
               onPress={handleJoin}
+              accessibilityRole="button"
+              accessibilityLabel={joined ? 'Teilnahme zurückziehen' : 'Teilnehmen'}
+              accessibilityState={{ selected: joined }}
               className={
                 joined
                   ? 'rounded-full bg-emerald-500 px-4 py-2.5 shadow-lg glow-emerald'

@@ -71,3 +71,34 @@ body {
 }
 
 
+
+/*
+ * Keyboard focus ring.
+ *
+ * React Native Web renders every Pressable as a plain <div tabindex="0">, and
+ * a bare div carries no default focus style at all - so navigating the app
+ * with a keyboard (or any switch/assistive device that drives focus) gave no
+ * visual sign of where you were. `:focus-visible` rather than `:focus` keeps
+ * this out of the way for mouse/touch users, where React Native Web still
+ * applies tabindex to every pressable and a stray click would otherwise leave
+ * a ring behind.
+ *
+ * Violet is the app's default accent; used as a fixed value here rather than
+ * the user's chosen accent because nothing currently exposes the live accent
+ * as a CSS custom property, and a wrong-but-visible ring beats a correct one
+ * that only sometimes ships.
+ */
+[tabindex]:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* The search input already gets its own focus treatment on the surface that
+ * wraps it (`.search-surface:focus-within` above) - a second ring on the
+ * input itself inside that surface would be a redundant box within a box. */
+.search-surface input:focus-visible {
+  outline: none;
+}

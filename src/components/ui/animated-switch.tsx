@@ -15,7 +15,18 @@ const PADDING = 2;
  * out of place next to the rest of this UI. This one animates both the thumb
  * position and the track color on every change.
  */
-export function AnimatedSwitch({ value, onValueChange }: { value: boolean; onValueChange: (next: boolean) => void }) {
+export function AnimatedSwitch({
+  value,
+  onValueChange,
+  accessibilityLabel,
+}: {
+  value: boolean;
+  onValueChange: (next: boolean) => void;
+  /** The row's own title - RN Web's native `<input type="checkbox">` role
+   *  reads nothing on its own, so without this a screen reader announces
+   *  "switch, off" with no idea which setting it belongs to. */
+  accessibilityLabel?: string;
+}) {
   const [anim] = useState(() => new Animated.Value(value ? 1 : 0));
   const { accent } = usePrefs();
   const a = accentOf(accent);
@@ -39,7 +50,13 @@ export function AnimatedSwitch({ value, onValueChange }: { value: boolean; onVal
   });
 
   return (
-    <Pressable onPress={() => onValueChange(!value)} hitSlop={8}>
+    <Pressable
+      onPress={() => onValueChange(!value)}
+      hitSlop={8}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: value }}
+      accessibilityLabel={accessibilityLabel}
+    >
       <Animated.View
         style={{
           width: TRACK_WIDTH,

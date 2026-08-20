@@ -161,6 +161,8 @@ function CreatorBody({ onClose, onOpenPaywall }: { onClose: () => void; onOpenPa
         <Avatar name={name} avatarUrl={photo} color={color} emoji={emoji} frame={frame} size={104} />
         <Pressable
           onPress={randomize}
+          accessibilityRole="button"
+          accessibilityLabel="Zufälligen Avatar würfeln"
           className="mt-4 flex-row items-center gap-1.5 rounded-full px-3.5 py-2 active:opacity-70"
           style={{ backgroundColor: `${a.tone}1a` }}
         >
@@ -180,6 +182,8 @@ function CreatorBody({ onClose, onOpenPaywall }: { onClose: () => void; onOpenPa
           </Text>
           <Pressable
             onPress={() => void pickPhoto()}
+            accessibilityRole="button"
+            accessibilityLabel="Foto ersetzen"
             className="rounded-full px-3 py-1.5 active:opacity-70"
             style={{ backgroundColor: `${a.tone}1a` }}
           >
@@ -192,6 +196,8 @@ function CreatorBody({ onClose, onOpenPaywall }: { onClose: () => void; onOpenPa
               setPhoto(null);
               haptics.light();
             }}
+            accessibilityRole="button"
+            accessibilityLabel="Foto entfernen"
             className="rounded-full bg-neutral-200 px-3 py-1.5 active:opacity-70 dark:bg-neutral-700"
           >
             <Text className="text-[11px] font-bold text-neutral-600 dark:text-neutral-300">Entfernen</Text>
@@ -200,6 +206,8 @@ function CreatorBody({ onClose, onOpenPaywall }: { onClose: () => void; onOpenPa
       ) : (
         <Pressable
           onPress={() => void pickPhoto()}
+          accessibilityRole="button"
+          accessibilityLabel="Foto hochladen"
           className="mb-6 items-center rounded-2xl border border-dashed py-4 active:opacity-70"
           style={{ borderColor: `${a.tone}80`, backgroundColor: `${a.tone}0d` }}
         >
@@ -223,6 +231,9 @@ function CreatorBody({ onClose, onOpenPaywall }: { onClose: () => void; onOpenPa
                 setColor(c);
                 haptics.light();
               }}
+              accessibilityRole="radio"
+              accessibilityState={{ checked: active }}
+              accessibilityLabel={`Farbe ${c}`}
               className="w-[12.5%] items-center justify-center"
             >
               <View
@@ -250,6 +261,9 @@ function CreatorBody({ onClose, onOpenPaywall }: { onClose: () => void; onOpenPa
                 setEmoji(active ? null : e);
                 haptics.light();
               }}
+              accessibilityRole="radio"
+              accessibilityState={{ checked: active }}
+              accessibilityLabel={`Emoji ${e}`}
               className="w-[12.5%] items-center justify-center"
             >
               <View
@@ -338,6 +352,8 @@ function CreatorBody({ onClose, onOpenPaywall }: { onClose: () => void; onOpenPa
       {!subscribed && (
         <Pressable
           onPress={onOpenPaywall}
+          accessibilityRole="button"
+          accessibilityLabel="Mehr über OnSpot+ erfahren"
           className="mb-5 flex-row items-center gap-2.5 rounded-2xl px-4 py-3 active:opacity-70"
           style={{ backgroundColor: `${a.tone}14` }}
         >
@@ -352,7 +368,12 @@ function CreatorBody({ onClose, onOpenPaywall }: { onClose: () => void; onOpenPa
       )}
 
       <PrimaryButton label="Speichern" onPress={() => void save()} className="mb-2" />
-      <Pressable onPress={onClose} className="items-center py-2 active:opacity-60">
+      <Pressable
+        onPress={onClose}
+        accessibilityRole="button"
+        accessibilityLabel="Abbrechen"
+        className="items-center py-2 active:opacity-60"
+      >
         <Text className="text-sm text-neutral-500 dark:text-neutral-400">Abbrechen</Text>
       </Pressable>
     </View>
@@ -388,7 +409,13 @@ function FrameTile({
   const { accent } = usePrefs();
   const a = accentOf(accent);
   return (
-    <Pressable onPress={onPress} className="w-1/4 items-center active:opacity-70">
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="radio"
+      accessibilityState={{ checked: active }}
+      accessibilityLabel={price !== undefined ? `${label}, ${price} Coins` : label}
+      className="w-1/4 items-center active:opacity-70"
+    >
       <View className="items-center justify-center">{children}</View>
       <Text
         numberOfLines={1}

@@ -138,6 +138,8 @@ export function SubscriptionModal({
           {subscribed ? (
             <Pressable
               onPress={() => setSubscribed(false)}
+              accessibilityRole="button"
+              accessibilityLabel="Abo kündigen"
               className="mt-6 items-center rounded-full border border-black/10 py-3.5 dark:border-white/20"
             >
               <Text className="text-sm font-bold text-neutral-700 dark:text-neutral-200">Abo kündigen</Text>
@@ -149,7 +151,12 @@ export function SubscriptionModal({
                 onPress={() => setSubscribed(true)}
                 className="mt-6"
               />
-              <Pressable onPress={onClose} className="mt-2 items-center py-2">
+              <Pressable
+                onPress={onClose}
+                accessibilityRole="button"
+                accessibilityLabel="Ich riskiere es"
+                className="mt-2 items-center py-2"
+              >
                 <Text className="text-sm text-neutral-500 dark:text-neutral-400">Ich riskiere es</Text>
               </Pressable>
               <Text className="mt-1 text-center text-[11px] text-neutral-400 dark:text-neutral-500">
@@ -172,6 +179,8 @@ export function SubscriptionModal({
               />
               <Pressable
                 onPress={() => setSubscribed(true)}
+                accessibilityRole="button"
+                accessibilityLabel="Gleich Plus holen – 4,99 Euro pro Monat"
                 className="mt-2 items-center rounded-full border border-black/10 py-3 dark:border-white/20"
               >
                 <Text className="text-sm font-semibold text-neutral-700 dark:text-neutral-200">
@@ -180,7 +189,12 @@ export function SubscriptionModal({
               </Pressable>
               {/* Naming the choice instead of offering a neutral "maybe later"
                   makes declining a decision rather than a reflex. */}
-              <Pressable onPress={onClose} className="mt-1 items-center py-2">
+              <Pressable
+                onPress={onClose}
+                accessibilityRole="button"
+                accessibilityLabel="Ich bleibe bei Werbung"
+                className="mt-1 items-center py-2"
+              >
                 <Text className="text-sm text-neutral-500 dark:text-neutral-400">Ich bleibe bei Werbung</Text>
               </Pressable>
             </>
