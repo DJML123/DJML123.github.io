@@ -41,6 +41,7 @@ export { default as ImagePlus } from 'lucide-react-native/icons/image-plus';
 export { default as Info } from 'lucide-react-native/icons/info';
 export { default as Loader } from 'lucide-react-native/icons/loader';
 export { default as LocateFixed } from 'lucide-react-native/icons/locate-fixed';
+export { default as List } from 'lucide-react-native/icons/list';
 export { default as Lock } from 'lucide-react-native/icons/lock';
 export { default as LogOut } from 'lucide-react-native/icons/log-out';
 export { default as MailCheck } from 'lucide-react-native/icons/mail-check';

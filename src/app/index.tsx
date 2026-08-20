@@ -2,11 +2,14 @@ import { Redirect } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colorScheme as nativewindColorScheme, useColorScheme } from 'nativewind';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Appearance, Platform, View } from 'react-native';
+import { Appearance, Platform, Pressable, View } from 'react-native';
 
 import { VideoFeed } from '@/components/feed/video-feed';
 import { OnSpotMap, type OnSpotMapHandle } from '@/components/map/map-view';
+import { NearbyListModal } from '@/components/map/nearby-list-modal';
 import type { GeocodeResult } from '@/components/map/use-geocode-search';
+import { List } from '@/components/ui/icons';
+import { Surface } from '@/components/ui/surface';
 import { ActivityModal } from '@/components/ui/activity-modal';
 import { AuthModal } from '@/components/ui/auth-modal';
 import { AvatarCreator } from '@/components/ui/avatar-creator';
@@ -107,6 +110,7 @@ export default function OnSpotScreen() {
   const [activityVisible, setActivityVisible] = useState(false);
   const [leaderboardVisible, setLeaderboardVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
+  const [nearbyListVisible, setNearbyListVisible] = useState(false);
 
   const mapRef = useRef<OnSpotMapHandle>(null);
 
@@ -195,6 +199,26 @@ export default function OnSpotScreen() {
               onOverlayOpenChange={setMapOverlayOpen}
             />
           </MapErrorBoundary>
+          {/* A text equivalent of what the map shows. The map itself is a
+              <canvas> - there is no way to make a canvas accessible, so this
+              is the honest fix: the same streams/events/places as a real,
+              readable, keyboard-reachable list. Sits directly above the map's
+              own locate button (bottom-32) in the same right-hand column, and
+              only while there is something on top of the map to hide: a
+              detail sheet or route already owns that space. */}
+          {activeTab === 'map' && !mapOverlayOpen && (
+            <Pressable
+              onPress={() => setNearbyListVisible(true)}
+              hitSlop={6}
+              accessibilityRole="button"
+              accessibilityLabel="Liste ansehen: alles in der Nähe als Text"
+              className="absolute bottom-48 right-4 z-40 active:opacity-50"
+            >
+              <Surface className="h-12 w-12 items-center justify-center rounded-[20px]">
+                <List size={20} color={isDark ? '#e4e4e7' : '#3f3f46'} strokeWidth={2.4} />
+              </Surface>
+            </Pressable>
+          )}
         </View>
         <View className="flex-1" style={activeTab === 'map' ? { display: 'none' } : undefined}>
           <VideoFeed />
@@ -362,6 +386,13 @@ export default function OnSpotScreen() {
       />
 
       <CreateSpotModal visible={createVisible} onClose={() => setCreateVisible(false)} onCreate={handleCreate} />
+
+      <NearbyListModal
+        visible={nearbyListVisible}
+        onClose={() => setNearbyListVisible(false)}
+        spots={filteredSpots}
+        onSelectSpot={handleSelectSpot}
+      />
 
       <CelebrationModal
         visible={milestone != null}
